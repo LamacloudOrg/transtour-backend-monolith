@@ -14,12 +14,10 @@ public class User {
     private String password;
     @Column(name = "full_name")
     private String fullName;
-    @Column(name = "enabled")
-    private boolean enabled;
+    @Column(name = "status")
+    private String status;
     @Column(name = "phone")
     private String phone;
-    @Column(name = "mobile_phone")
-    private String mobilePhone;
     @Column(name = "email")
     private String email;
     @Column(name = "user_role")

@@ -1,2 +1,2 @@
-insert into public.user (id,dni,email,password,mobile_phone,full_name,status,rol)
-VALUES (default, 34404216,'pomalianni@gmail.com','12434',9221,'pablo ocanto','ENALBED','USER');
+insert into users (dni,password,full_name,status,phone,email,user_role)
+VALUES (34404216,'12434','Pablo Ocanto','ENABLED',1136319469,'pomalianni@gmail.com','USER');

@@ -36,7 +36,7 @@ public class UserService {
 
                     optionalUser.orElseThrow(UserNotExists::new);
                     User user = optionalUser.get();
-                    if (!user.isEnabled()) throw new InactiveUser();
+                    if (!user.getStatus().equals("ENABLED")) throw new InactiveUser();
                     return TokenUtil.createJWT("1", null, user.getDni().toString(), user.getRole(), 2000L);
                 }
         );
@@ -68,7 +68,7 @@ public class UserService {
                     Optional<User> userOpt = repository.findByDni(dni);
                     userOpt.orElseThrow(UserNotExists::new);
                     User user = userOpt.get();
-                    user.setEnabled(true);
+                    user.setStatus("ENABLED");
                     user.setPassword(randomPassword);
                     repository.save(user);
                     return randomPassword;
