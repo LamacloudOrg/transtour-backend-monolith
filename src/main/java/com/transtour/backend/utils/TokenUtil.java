@@ -1,4 +1,5 @@
 package com.transtour.backend.utils;
+import com.transtour.backend.model.Role;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -7,14 +8,15 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 import java.security.Key;
 import java.util.Date;
+import java.util.List;
 
 public class TokenUtil {
 
-    private static String SECRET_KEY = "test";
-    private static String AUTHORITIES_KEY = "authorities";
-    private static long JWT_TOKEN_VALIDITY = 20l;
+    private static final String SECRET_KEY = "test";
+    private static final String AUTHORITIES_KEY = "authorities";
+    private static final long JWT_TOKEN_VALIDITY = 20L;
 
-    public static String createJWT(String id, String issuer, String subject, String role, long ttlMillis) {
+    public static String createJWT(String id, String issuer, String subject, List<Role> role, long ttlMillis) {
 
         //The JWT signature algorithm we will be using to sign the token
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS512;

@@ -2,7 +2,7 @@ package com.transtour.backend.dto;
 
 import lombok.Data;
 @Data
-public class RegisterDTO {
-    private Long dni;
+public class AuthenticationRequest {
+    private String dni;
     private String password;
 }
