@@ -18,4 +18,10 @@ public interface TokenRepository extends JpaRepository<Token, Integer> {
     List<Token> findAllValidTokenByUser(String id);
 
     Optional<Token> findByToken(String token);
+
+    @Override
+    <S extends Token> S save(S entity);
+
+    @Override
+    <S extends Token> List<S> saveAll(Iterable<S> entities);
 }

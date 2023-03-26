@@ -1,6 +1,6 @@
 package com.transtour.security.oauth.services;
 
-import com.transtour.backend.repository.TokenRepository;
+import com.transtour.kernel.repository.TokenRepository;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

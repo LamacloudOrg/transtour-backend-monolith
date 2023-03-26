@@ -1,4 +1,3 @@
-rootProject.name = 'backend'
+rootProject.name = "tanstour-back"
 include ':kernel'
 include ':security'
-

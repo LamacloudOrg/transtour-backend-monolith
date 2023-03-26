@@ -22,11 +22,11 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
-    private final UserRepository repository;
     private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+    private final UserRepository userRepository;
 
     public AuthenticationResponse register(RegisterRequest request) {
         User user = User.builder()
@@ -38,7 +38,7 @@ public class AuthenticationService {
                 .status(request.getStatus())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .build();
-        User savedUser = repository.saveAndFlush(user);
+        User savedUser = userRepository.save(user);
         String jwtToken = jwtService.generateToken(user);
         saveUserToken(savedUser, jwtToken);
         return AuthenticationResponse.builder()
@@ -53,7 +53,7 @@ public class AuthenticationService {
                         request.getPassword()
                 )
         );
-        User user = repository.findByDni(request.getDni())
+        User user = userRepository.findByDni(request.getDni())
                 .orElseThrow(() -> {
                     return new UserNotExists();
                 });
@@ -65,6 +65,7 @@ public class AuthenticationService {
                 .build();
     }
 
+
     private void saveUserToken(User user, String jwtToken) {
         Token token = Token.builder()
                 .id(UUID.randomUUID().toString())
@@ -74,7 +75,7 @@ public class AuthenticationService {
                 .expired(false)
                 .revoked(false)
                 .build();
-        tokenRepository.saveAndFlush(token);
+        tokenRepository.save(token);
     }
 
     private void revokeAllUserTokens(User user) {
@@ -87,4 +88,8 @@ public class AuthenticationService {
         });
         tokenRepository.saveAll(validUserTokens);
     }
+
+
 }
+
+

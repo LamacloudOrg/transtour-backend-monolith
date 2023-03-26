@@ -16,4 +16,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByDni(String dni);
 
+    @Override
+    <S extends User> S save(S entity);
 }
