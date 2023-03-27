@@ -1,0 +1,16 @@
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+jar.enabled = true
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    implementation 'com.google.guava:guava:31.0.1-jre'
+    implementation project(":kernel")
+    annotationProcessor 'org.projectlombok:lombok'
+
+}

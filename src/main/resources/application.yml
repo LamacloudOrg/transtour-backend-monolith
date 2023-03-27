@@ -1,0 +1,36 @@
+ddd:
+  context: transtour
+spring:
+  sql:
+    init:
+      mode: always
+  datasource:
+    url: jdbc:postgresql://31.220.61.234:5432/postgres
+    username: postgres
+    password: ''
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    generate-ddl: true
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  mail:
+    host: smtp.gmail.com
+    username: pomalianni@gmail.com
+    password: newaccount.21
+    properties:
+      mail:
+        smtp:
+          auth: true
+          port: 25
+          starttls:
+            enable: true
+            required: true
+        transport:
+          protocol: smtp
