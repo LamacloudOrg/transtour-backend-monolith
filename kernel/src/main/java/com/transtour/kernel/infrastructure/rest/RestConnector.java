@@ -8,7 +8,6 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import net.jodah.failsafe.Failsafe;
 import net.jodah.failsafe.RetryPolicy;
-import org.owasp.encoder.Encode;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
@@ -119,12 +118,14 @@ public abstract class RestConnector {
         // on failure log error
         retry.onFailure(failure -> {
             String url = properties.getUri() + endpoint;
-            LOGGER.error("Failure while invoking endpoint {} {}", Encode.forJava(url),
-                failure.getFailure().getMessage());
+            //  LOGGER.error("Failure while invoking endpoint {} {}", Encode.forJava(url),
+            //failure.getFailure().getMessage());
 
-            if (failure.getFailure() instanceof HttpStatusCodeException)
-                LOGGER.error(SERVICE_RESPONDED_WITH,
-                    ((HttpStatusCodeException) failure.getFailure()).getResponseBodyAsString());
+            if (failure.getFailure() instanceof HttpStatusCodeException) {
+
+            }
+            //    LOGGER.error(SERVICE_RESPONDED_WITH,
+            //  ((HttpStatusCodeException) failure.getFailure()).getResponseBodyAsString());
         });
 
         // maximum retries

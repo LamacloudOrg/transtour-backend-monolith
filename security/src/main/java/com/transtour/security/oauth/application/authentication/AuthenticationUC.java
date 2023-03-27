@@ -1,23 +1,21 @@
 package com.transtour.security.oauth.application.authentication;
 
-import com.transtour.kernel.domain.Service;
-import com.transtour.kernel.domain.bus.command.Command;
 import com.transtour.kernel.domain.user.Token;
 import com.transtour.kernel.domain.user.TokenType;
 import com.transtour.kernel.domain.user.User;
 import com.transtour.kernel.exceptions.UserNotExists;
-import com.transtour.kernel.repository.TokenRepository;
-import com.transtour.kernel.repository.UserRepository;
+import com.transtour.kernel.shared.infrastructure.persistence.userrepository.TokenRepository;
+import com.transtour.kernel.shared.infrastructure.persistence.userrepository.UserRepository;
 import com.transtour.security.oauth.application.AuthenticationResponse;
 import com.transtour.security.oauth.application.authentication.query.AunthenticationQuery;
 import com.transtour.security.oauth.configuration.JwtService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
 
 @Service
 @Transactional

@@ -2,9 +2,9 @@ package com.transtour.security.oauth.application.registration.command;
 
 import com.transtour.kernel.domain.bus.command.CommandHandler;
 import com.transtour.security.oauth.application.registration.RegistrationUC;
+import org.springframework.stereotype.Component;
 
-import com.transtour.kernel.domain.Service;
-@Service
+@Component
 public class RegistrationCommandHandler implements CommandHandler<RegistrationCommand> {
 
     private final RegistrationUC useCase;

@@ -17,12 +17,12 @@ public class LoggingInterceptor implements ClientHttpRequestInterceptor {
 
     @Override
     public ClientHttpResponse intercept(HttpRequest req, byte[] reqBody, ClientHttpRequestExecution ex) throws IOException {
-        LOGGER.debug("Request body: \n{}", new String(reqBody, StandardCharsets.UTF_8));
+        //LOGGER.debug("Request body: \n{}", new String(reqBody, StandardCharsets.UTF_8));
         ClientHttpResponse response = ex.execute(req, reqBody);
         var isr = new InputStreamReader(response.getBody(), StandardCharsets.UTF_8);
         var reader = new BufferedReader(isr);
         String body = reader.lines().collect(Collectors.joining("\n"));
-        LOGGER.debug("Response body: \n{}", body);
+        //LOGGER.debug("Response body: \n{}", body);
         reader.close();
         return response;
     }

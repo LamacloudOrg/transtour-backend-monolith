@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.transtour.kernel.domain.AggregateRoot;
 import com.transtour.kernel.domain.Id;
 import com.transtour.kernel.domain.criteria.Criteria;
+import com.transtour.kernel.domain.criteria.Filters;
 import com.transtour.kernel.domain.criteria.Pageable;
 import com.transtour.kernel.domain.criteria.Sentence;
 import com.transtour.kernel.infrastructure.jackson.ProcessDataException;

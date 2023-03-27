@@ -1,3 +1,5 @@
+ddd:
+  context: transtour
 spring:
   sql:
     init:

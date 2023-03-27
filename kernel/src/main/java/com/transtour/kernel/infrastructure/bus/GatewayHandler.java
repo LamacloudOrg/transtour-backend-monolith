@@ -51,9 +51,8 @@ public class GatewayHandler implements IGatewayHandler {
                 completableFuture.complete(queryBus.ask(query));
 
             }catch (Exception e){
-                e.printStackTrace();
+                completableFuture.completeExceptionally(e);
             }
-            return null;
         });
 
         return completableFuture;

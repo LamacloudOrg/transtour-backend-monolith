@@ -1,4 +1,4 @@
-package com.transtour.kernel.repository;
+package com.transtour.kernel.shared.infrastructure.persistence.userrepository;
 
 
 import com.transtour.kernel.domain.user.User;

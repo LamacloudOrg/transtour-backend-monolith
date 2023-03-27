@@ -1,13 +1,12 @@
 package com.transtour.security.oauth.application.registration;
 
-import com.transtour.kernel.domain.Service;
 import com.transtour.kernel.domain.user.User;
-import com.transtour.kernel.repository.UserRepository;
+import com.transtour.kernel.shared.infrastructure.persistence.userrepository.UserRepository;
 import com.transtour.security.oauth.application.registration.command.RegistrationCommand;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Set;
 
 @Service
 @Transactional

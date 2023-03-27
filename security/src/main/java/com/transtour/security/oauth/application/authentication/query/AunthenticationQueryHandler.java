@@ -1,14 +1,12 @@
 package com.transtour.security.oauth.application.authentication.query;
 
-import com.transtour.kernel.domain.Service;
-import com.transtour.kernel.domain.bus.query.Query;
 import com.transtour.kernel.domain.bus.query.QueryHandler;
 import com.transtour.security.oauth.application.AuthenticationResponse;
 import com.transtour.security.oauth.application.authentication.AuthenticationUC;
+import org.springframework.stereotype.Component;
 
-import java.util.concurrent.CompletableFuture;
 
-@Service
+@Component
 public class AunthenticationQueryHandler implements QueryHandler<AunthenticationQuery, AuthenticationResponse> {
 
     private final AuthenticationUC useCase;
