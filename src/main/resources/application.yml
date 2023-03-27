@@ -20,3 +20,17 @@ spring:
         format_sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+  mail:
+    host: smtp.gmail.com
+    username: pomalianni@gmail.com
+    password: newaccount.21
+    properties:
+      mail:
+        smtp:
+          auth: true
+          port: 25
+          starttls:
+            enable: true
+            required: true
+        transport:
+          protocol: smtp

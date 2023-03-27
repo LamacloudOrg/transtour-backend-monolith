@@ -1,4 +1,4 @@
-package com.transtour.backend;
+package com.transtour.notification;
 
 public class NotificationApplication {
     public static void main(String[] args) {

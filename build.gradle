@@ -33,6 +33,7 @@ dependencies {
     runtimeOnly 'org.postgresql:postgresql'
     implementation project(':kernel')
     implementation project(':security')
+    implementation project(':notification')
 }
 
 tasks.named('test') {
