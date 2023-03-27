@@ -1,6 +1,6 @@
 package com.transtour.kernel.repository;
 
-import com.transtour.kernel.model.Token;
+import com.transtour.kernel.domain.user.Token;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

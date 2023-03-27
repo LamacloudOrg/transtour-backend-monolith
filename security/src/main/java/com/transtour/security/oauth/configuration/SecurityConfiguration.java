@@ -1,7 +1,6 @@
 package com.transtour.security.oauth.configuration;
 
 
-import com.transtour.security.oauth.services.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
