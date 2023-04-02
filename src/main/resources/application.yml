@@ -1,6 +1,24 @@
 ddd:
   context: transtour
 spring:
+  profiles:
+    active: "dev"
+
+  datasource:
+    driverClassName: org.h2.Driver
+    password: password
+    url: jdbc:h2:mem:test_h2_db
+    username: sa
+  h2:
+    console:
+      enabled: true
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+
+---
+spring:
+  profiles:
+    active: "prod"
   sql:
     init:
       mode: always
@@ -20,6 +38,12 @@ spring:
         format_sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+---
+spring:
+  profiles:
+    active: "default"
+
   mail:
     host: smtp.gmail.com
     username: pomalianni@gmail.com
