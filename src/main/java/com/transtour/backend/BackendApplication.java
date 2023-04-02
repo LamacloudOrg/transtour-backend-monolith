@@ -14,6 +14,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories(basePackages = "com.transtour.kernel.shared.infrastructure.persistence.userrepository")
 public class BackendApplication implements ApplicationRunner {
 
+    private static final long MEGABYTE = 1024L * 1024L;
+
 
     public static void main(String[] args) {
         SpringApplication.run(BackendApplication.class, args);
@@ -22,5 +24,20 @@ public class BackendApplication implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
+        // Get the Java runtime
+        Runtime runtime = Runtime.getRuntime();
+        // Run the garbage collector
+        runtime.gc();
+
+        long memory = runtime.totalMemory() - runtime.freeMemory();
+        System.out.println("Used memory is bytes: " + memory);
+        System.out.println("Used memory is megabytes: "
+                +
+
+                bytesToMegabytes(memory));
+    }
+
+    private long bytesToMegabytes(long bytes) {
+        return bytes / MEGABYTE;
     }
 }
