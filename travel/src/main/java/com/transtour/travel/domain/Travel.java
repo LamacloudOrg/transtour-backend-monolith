@@ -1,34 +1,29 @@
 package com.transtour.travel.domain;
 
 import com.transtour.travel.application.create.command.CreationCommand;
-import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.TypeDef;
-import org.hibernate.annotations.TypeDefs;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "travel")
-
-
-@TypeDefs({
-        @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
-})
-
-
-public class Travel {
+@Table(name = "travels")
+public class Travel extends BaseEntity {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "travel_seq_gen")
+    @SequenceGenerator(name = "users_seq_gen", sequenceName = "travel_id_seq")
     private Long orderNumber;
 
 
@@ -43,14 +38,18 @@ public class Travel {
 
 
 
-    public static Travel create (CreationCommand command){
+    public static Travel create (CreationCommand command) {
+        LocalDateTime localDateTime = LocalDateTime.now();
+
+        ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.of("UTC-8"));
+
         Travel travel = new Travel();
         travel.setCompany(command.getCompany());
-        travel.setDateCreated(command.getDateCreated());
+        travel.setDateCreated(ZonedDateTime.now().toLocalDate());
         travel.setStatus(command.getStatus());
         travel.setCarDriver(command.getCarDriver());
         travel.setPayload(new TravelInfoPayload(
-                command.getStatus(), command.getDateCreated(), command.getCar(), command.getCarDriver(), command.getCarDriverName(), command.getTime(),
+                command.getStatus(), command.getDateCreated(), command.getCar(), command.getCarDriver(), command.getCarDriverName(), ZonedDateTime.now().toLocalTime(),
                 command.getCompany(), command.getBc(), command.getPassengerName(), command.getPassengerEmail(), command.getReserveNumber(),
                 command.getOriginAddress(), command.getDestinyAddress(), command.getObservation(), command.getAmount(), command.getWhitingTime(), command.getToll(),
                 command.getParkingAmount(), command.getTaxForReturn(), command.getTotalAmount()));

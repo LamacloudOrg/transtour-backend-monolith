@@ -1,10 +1,15 @@
 package com.transtour.travel.domain;
 
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-@Data
+
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class TravelInfoPayload {
 
     private String status;
@@ -28,26 +33,4 @@ public class TravelInfoPayload {
     private String taxForReturn;
     private String totalAmount;
 
-    public TravelInfoPayload(String status, LocalDate dateCreated, String car, String carDriver, String carDriverName, LocalTime time, String company, String bc, String passengerName, String passengerEmail, String reserveNumber, String originAddress, String destinyAddress, String observation, String amount, String whitingTime, String toll, String parkingAmount, String taxForReturn, String totalAmount) {
-        this.status = status;
-        this.dateCreated = dateCreated;
-        this.car = car;
-        this.carDriver = carDriver;
-        this.carDriverName = carDriverName;
-        this.time = time;
-        this.company = company;
-        this.bc = bc;
-        this.passengerName = passengerName;
-        this.passengerEmail = passengerEmail;
-        this.reserveNumber = reserveNumber;
-        this.originAddress = originAddress;
-        this.destinyAddress = destinyAddress;
-        this.observation = observation;
-        this.amount = amount;
-        this.whitingTime = whitingTime;
-        this.toll = toll;
-        this.parkingAmount = parkingAmount;
-        this.taxForReturn = taxForReturn;
-        this.totalAmount = totalAmount;
-    }
 }
