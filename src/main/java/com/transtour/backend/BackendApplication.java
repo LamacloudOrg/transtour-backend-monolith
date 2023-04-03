@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.transtour.kernel", "com.transtour.security.oauth", " com.transtour.notification"})
+@ComponentScan(basePackages = {"com.transtour.kernel", "com.transtour.security.oauth", " com.transtour.notification", " com.transtour.travel"})
 @EntityScan(value = "com.transtour.kernel.domain.user")
 @EnableJpaRepositories(basePackages = "com.transtour.kernel.shared.infrastructure.persistence.userrepository")
 public class BackendApplication implements ApplicationRunner {

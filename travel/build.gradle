@@ -1,19 +1,21 @@
-plugins {
-    id 'java'
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
-group 'com.transtour.travel'
-version '0.0.1-SNAPSHOT'
-
-repositories {
-    mavenCentral()
-}
+jar.enabled = true
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-}
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
-test {
-    useJUnitPlatform()
+
+    annotationProcessor 'org.projectlombok:lombok'
+    implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+    implementation project(":kernel")
 }
