@@ -1,24 +1,35 @@
 ddd:
   context: transtour
-spring:
-  profiles:
-    active: "dev"
-
-  datasource:
-    driverClassName: org.h2.Driver
-    password: password
-    url: jdbc:h2:mem:test_h2_db
-    username: sa
-  h2:
-    console:
-      enabled: true
-  jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-
 ---
 spring:
   profiles:
-    active: "prod"
+    active: h2,mail
+---
+
+spring:
+  profiles: h2
+
+  datasource:
+    driverClassName: org.h2.Driver
+    password: sa
+    username: sa
+    url: jdbc:h2:mem:testdb;INIT=create domain if not exists jsonb as text;MODE=PostgreSQL;DB_CLOSE_DELAY=-1
+  h2:
+    console:
+      enabled: true
+
+  jpa:
+    generate-ddl: true
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+---
+spring:
+  profiles: postgres
   sql:
     init:
       mode: always
@@ -41,8 +52,7 @@ spring:
 
 ---
 spring:
-  profiles:
-    active: "default"
+  profiles: mail
 
   mail:
     host: smtp.gmail.com

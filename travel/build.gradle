@@ -1,19 +1,16 @@
-plugins {
-    id 'java'
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
-group 'com.transtour.travel'
-version '0.0.1-SNAPSHOT'
-
-repositories {
-    mavenCentral()
-}
+jar.enabled = true
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-}
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'com.vladmihalcea:hibernate-types-52:2.9.7'
 
-test {
-    useJUnitPlatform()
+    annotationProcessor 'org.projectlombok:lombok'
+    implementation project(":kernel")
 }

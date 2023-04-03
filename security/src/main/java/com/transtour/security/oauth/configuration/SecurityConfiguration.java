@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -30,10 +31,10 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf()
-                .disable()
                 .authorizeRequests()
-                .antMatchers("/api/v1/oauth/**")
+                .requestMatchers(new AntPathRequestMatcher("/h2-console/**"))
+                .permitAll()
+                .requestMatchers(new AntPathRequestMatcher("/api/v1/oauth/**"))
                 .permitAll()
                 .anyRequest()
                 .authenticated()
@@ -46,6 +47,9 @@ public class SecurityConfiguration {
                 .logout()
                 .logoutUrl("/api/v1/oauth/logout")
                 .logoutSuccessHandler(((request, response, authentication) -> SecurityContextHolder.clearContext()));
+
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
 
         return http.build();
     }
