@@ -3,7 +3,9 @@ package com.transtour.travel.infrastructure.controllers.create;
 import com.transtour.kernel.infrastructure.bus.IGatewayHandler;
 import com.transtour.travel.application.create.command.CreationCommand;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
 public class CreateControllerImpl implements CreateController {
 
     private final IGatewayHandler gatewayHandler;
@@ -23,5 +25,5 @@ public class CreateControllerImpl implements CreateController {
         gatewayHandler.asyncDispatch(command);
 
         return ResponseEntity.ok(null);
-    };
-};
+    }
+}
