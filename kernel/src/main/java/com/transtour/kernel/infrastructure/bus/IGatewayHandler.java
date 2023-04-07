@@ -12,7 +12,7 @@ public interface IGatewayHandler  {
 
     void dispatch(Command command) throws CommandHandlerExecutionError;
 
-    void asyncDispatch(Command command) throws CommandHandlerExecutionError;
+    CompletableFuture<Void> asyncDispatch(Command command) throws CommandHandlerExecutionError;
 
 
 

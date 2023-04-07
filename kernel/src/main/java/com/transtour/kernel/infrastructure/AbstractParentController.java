@@ -22,8 +22,8 @@ public abstract class AbstractParentController implements IGatewayHandler {
     }
 
     @Override
-    public void asyncDispatch(Command command) throws CommandHandlerExecutionError {
-        gatewayHandler.asyncDispatch(command);
+    public CompletableFuture<Void> asyncDispatch(Command command) throws CommandHandlerExecutionError {
+        return gatewayHandler.asyncDispatch(command);
     }
 
     @Override

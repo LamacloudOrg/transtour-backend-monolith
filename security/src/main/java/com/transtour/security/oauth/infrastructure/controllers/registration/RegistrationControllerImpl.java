@@ -5,6 +5,8 @@ import com.transtour.security.oauth.application.registration.command.Registratio
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.CompletableFuture;
+
 @RestController
 public class RegistrationControllerImpl implements RegistrationController {
 
@@ -16,11 +18,12 @@ public class RegistrationControllerImpl implements RegistrationController {
     }
 
     @Override
-    public ResponseEntity<Void> register(RegisterRequest request) {
+    public CompletableFuture<ResponseEntity> register(RegisterRequest request) {
         RegistrationCommand command = new RegistrationCommand(request.getId(), request.getDni(), request.getEmail(), request.getFullName(), request.getPassword(), request.getStatus(), request.getPhone(), request.getRoles());
 
-        gatewayHandler.asyncDispatch(command);
+        return gatewayHandler
+                .asyncDispatch(command)
+                .<ResponseEntity>thenApply(ResponseEntity::ok);
 
-        return ResponseEntity.ok(null);
     }
 }

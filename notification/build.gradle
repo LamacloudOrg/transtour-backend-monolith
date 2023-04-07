@@ -7,9 +7,14 @@ configurations {
 jar.enabled = true
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
+    //implementation 'org.springframework.boot:spring-boot-starter-web'
+    //implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
     implementation 'com.google.guava:guava:31.0.1-jre'
+    implementation group: 'org.freemarker', name: 'freemarker', version: '2.3.31'
+
     implementation project(":kernel")
     annotationProcessor 'org.projectlombok:lombok'
 

@@ -1,5 +1,6 @@
 package com.transtour.security.oauth.infrastructure.controllers.authentication;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.concurrent.CompletableFuture;
@@ -10,7 +11,7 @@ import java.util.concurrent.CompletableFuture;
 public interface AuthenticationController {
 
     @PostMapping("/authenticate")
-    public CompletableFuture<Object> authentication(
+    public CompletableFuture<ResponseEntity> authentication(
             @RequestBody AuthenticationRequest request
     );
 }

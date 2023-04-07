@@ -3,7 +3,7 @@ ddd:
 ---
 spring:
   profiles:
-    active: h2,mail
+    active: global,mail,h2
 ---
 
 spring:
@@ -34,7 +34,7 @@ spring:
     init:
       mode: always
   datasource:
-    url: jdbc:postgresql://31.220.61.234:5432/postgres
+    url: ENC(0M3iQOQdS1lNBdvLyljP1VLfGCk2mMXv16V40ug0kFGEUNRwydo43HR0PklE/2BIkJQ6We/Arno=)
     username: postgres
     password: ''
     driver-class-name: org.postgresql.Driver
@@ -56,15 +56,25 @@ spring:
 
   mail:
     host: smtp.gmail.com
-    username: pomalianni@gmail.com
-    password: newaccount.21
+    username: ENC(w10l4gfMQJCQXTQtPAf4vL/aDuTTQSWOhzMbwfjuIVc=)
+    password: ENC(s0aAQXWzvEJzGil6A4AcWTkYzYb3rJfS2T2mJq410Yw=)
     properties:
       mail:
         smtp:
           auth: true
-          port: 25
+          port: 587
           starttls:
             enable: true
             required: true
         transport:
           protocol: smtp
+
+---
+spring:
+  profiles: global
+
+jasypt:
+  encryptor:
+    algorithm: PBEWithMD5AndDES
+    pool-size: 2
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator

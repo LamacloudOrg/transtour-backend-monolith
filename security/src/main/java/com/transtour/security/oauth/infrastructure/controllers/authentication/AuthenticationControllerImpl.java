@@ -18,7 +18,7 @@ public class AuthenticationControllerImpl implements AuthenticationController {
 
 
     @Override
-    public CompletableFuture<Object> authentication(AuthenticationRequest request) {
+    public CompletableFuture<ResponseEntity> authentication(AuthenticationRequest request) {
         return gatewayHandler
                 .asyncAsk(new AunthenticationQuery(request.getDni(), request.getPassword()))
                 .thenApply((result) -> ResponseEntity.ok(result));

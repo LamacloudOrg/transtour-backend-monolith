@@ -27,8 +27,8 @@ public class GatewayHandler implements IGatewayHandler {
     }
 
     @Override
-    public void asyncDispatch(Command command) throws CommandHandlerExecutionError {
-        CompletableFuture.runAsync(()->{
+    public CompletableFuture<Void> asyncDispatch(Command command) throws CommandHandlerExecutionError {
+        return CompletableFuture.runAsync(()->{
            try {
                commandBus.dispatch(command);
            }catch (Exception e){
