@@ -40,7 +40,7 @@ public class SendCodeByMailUC {
 
     @SneakyThrows
     public void send(SendCodeCommand command) {
-        User user = repository.findByDni(command.getDni()).orElseThrow(() -> new UserNotFoundException());
+        User user = repository.findByDni(command.getDni()).orElseThrow(() -> new UserNotFoundException("User with dni: " + command.getDni() + " not found"));
 
         MimeMessage message = javaMailSender.createMimeMessage();
 

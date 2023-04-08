@@ -26,19 +26,18 @@ public class Travel extends BaseEntity {
     @SequenceGenerator(name = "users_seq_gen", sequenceName = "travel_id_seq")
     private Long orderNumber;
 
+    private String carDriver;
+    private String company;
+    private LocalDate dateCreated;
+    @Enumerated(EnumType.STRING)
+    private TravelStatus status;
 
     @Convert(converter = TravelConverter.class)
     @Column(columnDefinition = "jsonb")
     private TravelInfoPayload payload;
 
-    private String carDriver; // Aca va el dni
-    private String company;
-    private LocalDate dateCreated;
-    private String status;
 
-
-
-    public static Travel create (CreationCommand command) {
+    public static Travel create(CreationCommand command) {
         LocalDateTime localDateTime = LocalDateTime.now();
 
         ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.of("UTC-8"));
@@ -46,7 +45,7 @@ public class Travel extends BaseEntity {
         Travel travel = new Travel();
         travel.setCompany(command.getCompany());
         travel.setDateCreated(ZonedDateTime.now().toLocalDate());
-        travel.setStatus(command.getStatus());
+        travel.setStatus(TravelStatus.CREATED);
         travel.setCarDriver(command.getCarDriver());
         travel.setPayload(new TravelInfoPayload(
                 command.getStatus(), command.getDateCreated(), command.getCar(), command.getCarDriver(), command.getCarDriverName(), ZonedDateTime.now().toLocalTime(),

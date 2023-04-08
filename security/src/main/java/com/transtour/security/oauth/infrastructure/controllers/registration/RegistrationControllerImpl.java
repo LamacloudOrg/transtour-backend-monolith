@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 public class RegistrationControllerImpl implements RegistrationController {
@@ -23,7 +24,8 @@ public class RegistrationControllerImpl implements RegistrationController {
 
         return gatewayHandler
                 .asyncDispatch(command)
-                .<ResponseEntity>thenApply(ResponseEntity::ok);
+                .<ResponseEntity>thenApply(ResponseEntity::ok)
+                .orTimeout(5, TimeUnit.SECONDS);
 
     }
 }

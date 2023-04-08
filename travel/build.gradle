@@ -9,6 +9,7 @@ jar.enabled = true
 dependencies {
   //  implementation 'org.springframework.boot:spring-boot-starter-web'
     // implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'com.vladmihalcea:hibernate-types-52:2.9.7'
 
     // annotationProcessor 'org.projectlombok:lombok'

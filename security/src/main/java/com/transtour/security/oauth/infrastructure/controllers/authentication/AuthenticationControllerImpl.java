@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 public class AuthenticationControllerImpl implements AuthenticationController {
@@ -18,11 +19,11 @@ public class AuthenticationControllerImpl implements AuthenticationController {
 
 
     @Override
-    public CompletableFuture<ResponseEntity> authentication(AuthenticationRequest request) {
+    public CompletableFuture<ResponseEntity<Object>> authentication(AuthenticationRequest request) {
         return gatewayHandler
                 .asyncAsk(new AunthenticationQuery(request.getDni(), request.getPassword()))
-                .thenApply((result) -> ResponseEntity.ok(result));
-
+                .thenApply((result) -> ResponseEntity.ok(result))
+                .orTimeout(5, TimeUnit.SECONDS);
 
     }
 

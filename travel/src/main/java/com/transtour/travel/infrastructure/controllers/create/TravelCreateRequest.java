@@ -10,7 +10,7 @@ import java.time.LocalTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateRequest {
+public class TravelCreateRequest {
 
     private String status;
     private LocalDate dateCreated;

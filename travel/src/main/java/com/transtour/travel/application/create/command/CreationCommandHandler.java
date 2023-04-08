@@ -1,15 +1,15 @@
 package com.transtour.travel.application.create.command;
 
 import com.transtour.kernel.domain.bus.command.CommandHandler;
-import com.transtour.travel.application.create.CreationUC;
+import com.transtour.travel.application.create.TravelCreationUC;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CreationCommandHandler implements CommandHandler<CreationCommand> {
 
-    private final CreationUC useCase;
+    private final TravelCreationUC useCase;
 
-    public CreationCommandHandler(CreationUC creationUC) {
+    public CreationCommandHandler(TravelCreationUC creationUC) {
         this.useCase = creationUC;
     }
 

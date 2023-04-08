@@ -11,7 +11,7 @@ import java.util.concurrent.CompletableFuture;
 public interface AuthenticationController {
 
     @PostMapping("/authenticate")
-    public CompletableFuture<ResponseEntity> authentication(
+    CompletableFuture<ResponseEntity<Object>> authentication(
             @RequestBody AuthenticationRequest request
     );
 }

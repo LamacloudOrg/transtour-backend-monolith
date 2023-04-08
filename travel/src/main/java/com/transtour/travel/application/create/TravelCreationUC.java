@@ -12,13 +12,11 @@ import javax.transaction.Transactional;
 
 @Service
 @Transactional
-
-public class CreationUC {
-
-    private static final Logger logger = LoggerFactory.getLogger(CreationUC.class);
+public class TravelCreationUC {
+    private static final Logger logger = LoggerFactory.getLogger(TravelCreationUC.class);
     private final TravelRepository repository;
 
-    public CreationUC(@Qualifier("JpaRepository") TravelRepository repository) {
+    public TravelCreationUC(@Qualifier("JpaRepository") TravelRepository repository) {
         this.repository = repository;
     }
 
