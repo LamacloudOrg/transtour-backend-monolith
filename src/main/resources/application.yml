@@ -1,10 +1,6 @@
 ddd:
   context: transtour
 ---
-spring:
-  profiles:
-    active: global,mail,postgres
----
 
 spring:
   profiles: h2
