@@ -1,6 +1,6 @@
-package com.transtour.vouchers;
+package com.transtour.user;
 
-public class VoucherApplication {
+public class Main {
     public static void main(String[] args) {
         System.out.println("Hello world!");
     }

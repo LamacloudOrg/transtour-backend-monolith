@@ -27,7 +27,9 @@ allprojects {
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        implementation 'org.springframework.boot:spring-boot-starter-security'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        implementation 'com.google.guava:guava:31.0.1-jre'
         //implementation 'org.springframework.retry:spring-retry:2.0.0'
         //implementation 'org.springframework:spring-aspects:5.3.25'
         compileOnly 'org.projectlombok:lombok'
@@ -49,6 +51,7 @@ dependencies {
     implementation project(':security')
     implementation project(':notification')
     implementation project(':travel')
+    implementation project(':user')
 }
 
 tasks.named('test') {

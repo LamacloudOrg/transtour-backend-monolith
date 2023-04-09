@@ -1,4 +1,4 @@
-package com.transtour.kernel.domain.user;
+package com.transtour.user.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

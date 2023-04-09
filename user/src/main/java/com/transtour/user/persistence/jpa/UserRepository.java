@@ -1,7 +1,6 @@
-package com.transtour.kernel.shared.infrastructure.persistence.userrepository;
+package com.transtour.user.persistence.jpa;
 
-
-import com.transtour.kernel.domain.user.User;
+import com.transtour.user.domain.User;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

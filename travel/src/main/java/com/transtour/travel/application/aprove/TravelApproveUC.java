@@ -3,15 +3,15 @@ package com.transtour.travel.application.aprove;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.transtour.kernel.domain.bus.EventBus;
 import com.transtour.kernel.domain.notification.NotificationTravelEmailEvent;
-import com.transtour.kernel.domain.user.User;
 import com.transtour.kernel.exceptions.UserNotExists;
-import com.transtour.kernel.shared.infrastructure.persistence.userrepository.UserRepository;
 import com.transtour.travel.application.aprove.command.TravelApproveCommand;
 import com.transtour.travel.domain.Travel;
 import com.transtour.travel.domain.TravelApproveException;
 import com.transtour.travel.domain.TravelNotFoundException;
 import com.transtour.travel.domain.TravelStatus;
 import com.transtour.travel.infrastructure.persistence.postgres.TravelRepository;
+import com.transtour.user.domain.User;
+import com.transtour.user.persistence.jpa.UserRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 

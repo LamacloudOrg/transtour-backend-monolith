@@ -1,7 +1,6 @@
 package com.transtour.security.oauth.application.registration.command;
 
 import com.transtour.kernel.domain.bus.command.Command;
-import com.transtour.kernel.domain.user.UserStatus;
 import lombok.Getter;
 
 import javax.management.relation.RoleStatus;
@@ -19,14 +18,14 @@ public class RegistrationCommand implements Command {
     private final String fullName;
     private final String password;
 
-    private final UserStatus status;
+    private final String status;
 
     private final String phone;
 
     private final List<RoleStatus> roles;
 
 
-    public RegistrationCommand(String id, String dni, String email, String fullName, String password, UserStatus status, String phone, List<RoleStatus> roles) {
+    public RegistrationCommand(String id, String dni, String email, String fullName, String password, String status, String phone, List<RoleStatus> roles) {
         this.id = id;
         this.dni = dni;
         this.email = email;

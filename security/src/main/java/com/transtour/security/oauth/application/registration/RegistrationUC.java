@@ -2,9 +2,10 @@ package com.transtour.security.oauth.application.registration;
 
 import com.transtour.kernel.domain.bus.EventBus;
 import com.transtour.kernel.domain.notification.NotificationEmailEvent;
-import com.transtour.kernel.domain.user.User;
-import com.transtour.kernel.shared.infrastructure.persistence.userrepository.UserRepository;
 import com.transtour.security.oauth.application.registration.command.RegistrationCommand;
+import com.transtour.user.domain.User;
+import com.transtour.user.domain.UserStatus;
+import com.transtour.user.persistence.jpa.UserRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -36,8 +37,7 @@ public class RegistrationUC {
                 .email(command.getEmail())
                 .phone(command.getPhone())
                 .dni(command.getDni())
-                .status(command.getStatus())
-                //.roles(Set.copyOf(command.getRoles()))
+                .status(UserStatus.ENABLED)
                 .password(passwordEncoder.encode(command.getPassword()))
                 .build();
         repository.save(user);

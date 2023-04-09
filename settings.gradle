@@ -3,5 +3,5 @@ include ':kernel'
 include ':security'
 include ':notification'
 include ':travel'
-include ':vouchers'
+include 'user'
 

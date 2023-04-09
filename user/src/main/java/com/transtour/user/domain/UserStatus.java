@@ -1,4 +1,4 @@
-package com.transtour.kernel.domain.user;
+package com.transtour.user.domain;
 
 public enum UserStatus {
     PENDING,

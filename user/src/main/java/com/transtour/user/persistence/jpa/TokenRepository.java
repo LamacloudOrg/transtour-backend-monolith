@@ -1,6 +1,6 @@
-package com.transtour.kernel.shared.infrastructure.persistence.userrepository;
+package com.transtour.user.persistence.jpa;
 
-import com.transtour.kernel.domain.user.Token;
+import com.transtour.user.domain.Token;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-
 
 @Repository
 @Qualifier("tokenRepo")
@@ -23,5 +22,6 @@ public interface TokenRepository extends JpaRepository<Token, Integer> {
     <S extends Token> S save(S entity);
 
     @Override
-    <S extends Token> List<S> saveAll(Iterable<S> entities);
+    <S extends Token> List<S> saveAll(Iterable<S> iterable);
+
 }
