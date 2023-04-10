@@ -1,18 +1,21 @@
 package com.transtour.user.application;
 
 import com.transtour.kernel.domain.bus.query.Response;
+import com.transtour.user.domain.Car;
+import lombok.Getter;
 
-import java.util.List;
+import java.util.Set;
 
+@Getter
 public class DriverResponse implements Response {
 
     private final String name;
-    private final List<String> patente;
+    private final Set<Car> cars;
     private final String dni;
 
-    public DriverResponse(String name, List<String> patente, String dni) {
+    public DriverResponse(String name, Set<Car> cars, String dni) {
         this.name = name;
-        this.patente = patente;
+        this.cars = cars;
         this.dni = dni;
     }
 }
