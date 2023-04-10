@@ -5,7 +5,7 @@ import com.transtour.kernel.domain.notification.NotificationEmailEvent;
 import com.transtour.security.oauth.application.registration.command.RegistrationCommand;
 import com.transtour.user.domain.User;
 import com.transtour.user.domain.UserStatus;
-import com.transtour.user.persistence.jpa.UserRepository;
+import com.transtour.user.infrastructure.persistence.jpa.UserRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

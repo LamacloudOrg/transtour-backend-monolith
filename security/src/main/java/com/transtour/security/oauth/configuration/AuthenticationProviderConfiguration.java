@@ -1,7 +1,7 @@
 package com.transtour.security.oauth.configuration;
 
 
-import com.transtour.user.persistence.jpa.UserRepository;
+import com.transtour.user.infrastructure.persistence.jpa.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

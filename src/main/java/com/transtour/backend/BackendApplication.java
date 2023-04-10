@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.transtour.kernel", "com.transtour.security.oauth", "com.transtour.notification", "com.transtour.travel", "com.transtour.user"})
 @EntityScan(basePackages = {"com.transtour.user.domain", "com.transtour.travel.domain"})
-@EnableJpaRepositories(basePackages = {"com.transtour.user.persistence", "com.transtour.travel.infrastructure.persistence"})
+@EnableJpaRepositories(basePackages = {"com.transtour.user.infrastructure.persistence", "com.transtour.travel.infrastructure.persistence"})
 public class BackendApplication implements ApplicationRunner {
 
     private static final long MEGABYTE = 1024L * 1024L;

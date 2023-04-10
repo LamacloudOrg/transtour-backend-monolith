@@ -4,7 +4,7 @@ package com.transtour.notification.application.send_activation_code_mail;
 import com.transtour.notification.application.send_activation_code_mail.command.SendCodeCommand;
 import com.transtour.notification.domain.UserNotFoundException;
 import com.transtour.user.domain.User;
-import com.transtour.user.persistence.jpa.UserRepository;
+import com.transtour.user.infrastructure.persistence.jpa.UserRepository;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import lombok.SneakyThrows;

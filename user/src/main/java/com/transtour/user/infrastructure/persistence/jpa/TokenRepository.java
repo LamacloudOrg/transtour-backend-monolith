@@ -1,4 +1,4 @@
-package com.transtour.user.persistence.jpa;
+package com.transtour.user.infrastructure.persistence.jpa;
 
 import com.transtour.user.domain.Token;
 import org.springframework.beans.factory.annotation.Qualifier;
