@@ -2,7 +2,7 @@ package com.transtour.security.oauth.configuration;
 
 
 import com.transtour.user.domain.Token;
-import com.transtour.user.persistence.jpa.TokenRepository;
+import com.transtour.user.infrastructure.persistence.jpa.TokenRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.LogoutHandler;

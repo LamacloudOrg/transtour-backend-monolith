@@ -11,7 +11,7 @@ import com.transtour.travel.domain.TravelNotFoundException;
 import com.transtour.travel.domain.TravelStatus;
 import com.transtour.travel.infrastructure.persistence.postgres.TravelRepository;
 import com.transtour.user.domain.User;
-import com.transtour.user.persistence.jpa.UserRepository;
+import com.transtour.user.infrastructure.persistence.jpa.UserRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 

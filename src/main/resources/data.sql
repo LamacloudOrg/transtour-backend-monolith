@@ -11,7 +11,19 @@ insert into users (id,dni,password,full_name,status,phone,email)
 values ('6c8b9b1c-0442-4156-88c6-47ad5d3fce70','93479822','$2a$10$jGKDuk9g/q6dF0mbAwnhbOvvzC2seU9piA8RTFbfeJhlTghZe/3ZC','Enerique Neyra','ENABLED','1140377287','bsastranstour@hotmail.com')
 ON CONFLICT DO NOTHING;
 
+-- DRIVERS INIT --
+insert into users (id,dni,password,full_name,status,phone,email)
+values ('f9d9a50a-cd99-4450-8602-cf7c00d1db11','23132456','$2a$10$jGKDuk9g/q6dF0mbAwnhbOvvzC2seU9piA8RTFbfeJhlTghZe/3ZC','Pedro Picapiedra','ENABLED','1140377287','bsastranstour@hotmail.com')
+ON CONFLICT DO NOTHING;
 
+insert into users (id,dni,password,full_name,status,phone,email)
+values ('f7e7adbc-db32-457f-bb7c-39a1792a5501','23132457','$2a$10$jGKDuk9g/q6dF0mbAwnhbOvvzC2seU9piA8RTFbfeJhlTghZe/3ZC','Dave Navarro','ENABLED','1140377287','bsastranstour@hotmail.com')
+ON CONFLICT DO NOTHING;
+
+insert into users (id,dni,password,full_name,status,phone,email)
+values ('edd55fec-b58a-4b57-8b9e-e62b7ab7d6c5','23132458','$2a$10$jGKDuk9g/q6dF0mbAwnhbOvvzC2seU9piA8RTFbfeJhlTghZe/3ZC','Sargento Garcia','ENABLED','1140377287','bsastranstour@hotmail.com')
+ON CONFLICT DO NOTHING;
+-- DRIVERS FIN --
 
 insert into roles (id,name)
 values ('daeaf640-bbca-4d3f-93ca-8f29126d5233','ROL_USER')
@@ -39,3 +51,16 @@ values ('6c8b9b1c-0442-4156-88c6-47ad5d3fce70','803745ce-2411-4b12-ba3f-04951ad5
 ON CONFLICT DO NOTHING;
 
 
+-- DRIVERS ROL INIT --
+insert into user_role (user_id,role_id)
+values ('f9d9a50a-cd99-4450-8602-cf7c00d1db11','daeaf640-bbca-4d3f-93ca-8f29126d5233')
+ON CONFLICT DO NOTHING;
+
+insert into user_role (user_id,role_id)
+values ('f7e7adbc-db32-457f-bb7c-39a1792a5501','daeaf640-bbca-4d3f-93ca-8f29126d5233')
+ON CONFLICT DO NOTHING;
+
+insert into user_role (user_id,role_id)
+values ('edd55fec-b58a-4b57-8b9e-e62b7ab7d6c5','daeaf640-bbca-4d3f-93ca-8f29126d5233')
+ON CONFLICT DO NOTHING;
+-- DRIVERS ROL FIN --
