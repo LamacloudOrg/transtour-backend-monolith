@@ -7,10 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.concurrent.CompletableFuture;
 
-@RequestMapping("/api/v1/user/driver")
-@CrossOrigin("*")
+@RequestMapping("/api/v1/user")
 public interface GetDriverControllerImpl {
 
-    @GetMapping
+    @GetMapping("/driver")
     CompletableFuture<ResponseEntity<Object>> findAllDriver();
 }

@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
-
 @RestController
 public class AuthenticationControllerImpl implements AuthenticationController {
 

@@ -31,6 +31,8 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .cors()
+                .and()
                 .authorizeRequests()
                 .requestMatchers(new AntPathRequestMatcher("/h2-console/**"))
                 .permitAll()
@@ -58,7 +60,7 @@ public class SecurityConfiguration {
     CorsConfigurationSource corsConfigurationSource() {
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         final CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
+        // config.setAllowCredentials(true);
         config.addAllowedOrigin(CorsConfiguration.ALL);
         config.addAllowedMethod("OPTIONS");
         config.addAllowedMethod("HEAD");
@@ -76,7 +78,12 @@ public class SecurityConfiguration {
         config.addAllowedHeader("Access-Control-Max-Age");
         config.addAllowedHeader("Authorization");
 
+        config.addAllowedOrigin("http://localhost:3000");
+
         source.registerCorsConfiguration("/**", config);
         return source;
+
     }
+
+
 }
