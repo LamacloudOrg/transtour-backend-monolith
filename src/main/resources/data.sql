@@ -79,3 +79,17 @@ ON CONFLICT DO NOTHING;
 
 
 -- DRIVERS ROL FIN --
+
+-- COMPANY INI --
+insert into company (company_id, full_name, nick_name, cuit, email, phone, whiting_time_amount, disposition_time_amount)
+values ('8d57e979-5964-4caa-a3ec-d3dc78ee498b', 'Tarjeta Naranja SRL.', 'Naranja X', 208887773, 'naranjax@naranja.com.ar', 2216216295, 3500, 2500)
+ON CONFLICT DO NOTHING;
+
+insert into company (company_id, full_name, nick_name, cuit, email, phone, whiting_time_amount, disposition_time_amount)
+values ('5e0c9c68-7461-40c0-8daa-7f42ca8af700', 'Toyota SRL.', 'Toyota', 208887773, 'info@toyota.com.ar', 2216216295, 3500, 2500)
+ON CONFLICT DO NOTHING;
+
+insert into company (company_id, full_name, nick_name, cuit, email, phone, whiting_time_amount, disposition_time_amount)
+values ('266526c8-a0dd-47a8-a73d-1d61a831ffe4', 'Mercado Libre SRL.', 'Meli', 208887773, 'info@mercadolibre.com.ar', 2216216295, 3500, 2500)
+ON CONFLICT DO NOTHING;
+-- COMPANY FIN --
