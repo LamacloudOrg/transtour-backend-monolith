@@ -7,10 +7,10 @@ import java.util.List;
 @Getter
 public class CompaniesResponse implements Response {
 
-    private final List<CompanyResponse> company;
+    private final List<CompanyResponse> data;
 
 
     public CompaniesResponse(List<CompanyResponse> json) {
-        this.company = json;
+        this.data = json;
     }
 }
