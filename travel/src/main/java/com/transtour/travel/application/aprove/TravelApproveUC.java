@@ -50,13 +50,23 @@ public class TravelApproveUC {
         travel.setStatus(TravelStatus.APPROVED);
         travelRepository.save(travel);
 
-        eventBus.publish(List.of(NotificationTravelEmailEvent.create(
-                UUID.randomUUID().toString(),
-                user.getEmail(),
-                "Nuevo Viaje Asignado",
-                "",
-                travelInfo(travel)
-        )));
+        eventBus.publish(List.of(
+                NotificationTravelEmailEvent.create(
+                        UUID.randomUUID().toString(),
+                        user.getEmail(),
+                        "Nuevo Viaje Asignado",
+                        "",
+                        travelInfo(travel)
+                ),
+                NotificationTravelEmailEvent.create(
+                        UUID.randomUUID().toString(),
+                        travel.getPayload().getPassengerEmail(),
+                        "Nuevo Viaje Asignado",
+                        "",
+                        travelInfo(travel)
+                )
+        ));
+
     }
 
     private HashMap<String, String> travelInfo(Travel travel) {
