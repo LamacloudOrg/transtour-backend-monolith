@@ -73,8 +73,16 @@ insert into cars (id,patent,brand,model,release_year)
 values ('5eeba015-b59e-4805-bf62-a9ed4ebe7349','AFZ 989','Toyota','Corola','2023-04-01')
 ON CONFLICT DO NOTHING;
 
+insert into cars (id,patent,brand,model,release_year)
+values ('3e08c173-a838-46bd-b90a-d98715d5b0bf','LUC 284','Renault','Fluence','2012-12-12')
+ON CONFLICT DO NOTHING;
+
 insert into user_car (user_id,car_id)
 values ('edd55fec-b58a-4b57-8b9e-e62b7ab7d6c5','5eeba015-b59e-4805-bf62-a9ed4ebe7349')
+ON CONFLICT DO NOTHING;
+
+insert into user_car (user_id,car_id)
+values ('edd55fec-b58a-4b57-8b9e-e62b7ab7d6c5','3e08c173-a838-46bd-b90a-d98715d5b0bf')
 ON CONFLICT DO NOTHING;
 
 
