@@ -1,4 +1,4 @@
-package com.transtour.travel.domain;
+package com.transtour.kernel.domain.travel;
 
 public enum TravelStatus {
     CREATED,

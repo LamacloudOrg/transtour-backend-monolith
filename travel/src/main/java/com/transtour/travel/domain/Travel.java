@@ -1,5 +1,6 @@
 package com.transtour.travel.domain;
 
+import com.transtour.kernel.domain.travel.TravelStatus;
 import com.transtour.travel.application.create.command.CreationCommand;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

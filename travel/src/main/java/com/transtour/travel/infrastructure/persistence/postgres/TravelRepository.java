@@ -1,7 +1,7 @@
 package com.transtour.travel.infrastructure.persistence.postgres;
 
 import com.transtour.travel.domain.Travel;
-import com.transtour.travel.domain.TravelStatus;
+import com.transtour.kernel.domain.travel.TravelStatus;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
