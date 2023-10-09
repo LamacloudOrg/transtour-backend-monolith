@@ -21,7 +21,7 @@ public class AndroidNotificationCommand implements Command {
     public AndroidNotificationCommand(
             @NonNull String to,
             @NonNull UUID notificationId,
-            @NonNull Integer travelId,
+            @NonNull Long travelId,
             @NonNull TravelStatus status,
             @NonNull String origin,
             @NonNull String destiny,
@@ -45,9 +45,9 @@ public class AndroidNotificationCommand implements Command {
         info.put("destiny",destiny);
         info.put("passenger",passenger);
         info.put("observation",observation.orElseGet(()->""));
-        ZonedDateTime zonedDateTime = addZoneDateTime(date,time);
-        info.put("date", String.valueOf(zonedDateTime.toLocalDate()));
-        info.put("time", String.valueOf(zonedDateTime.toLocalTime()));
+        //ZonedDateTime zonedDateTime = addZoneDateTime(date,time);
+        info.put("date", String.valueOf(date));
+        info.put("time", String.valueOf(time));
         info.put("company",company.toLowerCase().trim());
         info.put("carDriver",company.toLowerCase().trim());
         info.put("waitingTime", String.valueOf(waitingTime.orElseGet(()-> new Double(0))));

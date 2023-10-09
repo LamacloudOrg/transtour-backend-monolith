@@ -48,9 +48,9 @@ public class TravelApproveUC {
 
         Travel travel = travelRepository.findById(command.getId()).orElseThrow(() -> new TravelNotFoundException("travel :" + command.getId().toString() + " not found"));
 
-        if (!travel.getStatus().equals(TravelStatus.CREATED)) {
-            throw new TravelApproveException("El viaje ya fue aprobado o cancelado");
-        }
+      //  if (!travel.getStatus().equals(TravelStatus.CREATED)) {
+        //      throw new TravelApproveException("El viaje ya fue aprobado o cancelado");
+        // }
 
         Driver driver = driverRepository.findByDni(travel.getCarDriver()).orElseThrow(UserNotExists::new);
 

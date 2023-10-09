@@ -23,6 +23,12 @@ ON CONFLICT DO NOTHING;
 insert into users (id,dni,password,full_name,status,phone,email)
 values ('edd55fec-b58a-4b57-8b9e-e62b7ab7d6c5','23132458','$2a$10$jGKDuk9g/q6dF0mbAwnhbOvvzC2seU9piA8RTFbfeJhlTghZe/3ZC','Sargento Garcia','ENABLED','1140377287','bsastranstour@hotmail.com')
 ON CONFLICT DO NOTHING;
+
+insert into taxi_driver (id,firebase_token)
+values ('edd55fec-b58a-4b57-8b9e-e62b7ab7d6c5','token')
+ON CONFLICT DO NOTHING;
+
+
 -- DRIVERS FIN --
 
 insert into roles (id,name)
@@ -65,8 +71,8 @@ values ('edd55fec-b58a-4b57-8b9e-e62b7ab7d6c5','415ccece-73da-437f-b40d-f1ad21e1
 ON CONFLICT DO NOTHING;
 
 
-insert into taxi_driver (id)
-values ('edd55fec-b58a-4b57-8b9e-e62b7ab7d6c5')
+insert into taxi_driver (id,firebase_token)
+values ('edd55fec-b58a-4b57-8b9e-e62b7ab7d6c5','Kñsd21o123.')
 ON CONFLICT DO NOTHING;
 
 insert into cars (id,patent,brand,model,release_year)

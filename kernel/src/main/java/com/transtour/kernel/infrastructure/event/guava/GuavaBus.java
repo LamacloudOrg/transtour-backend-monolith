@@ -19,7 +19,8 @@ public class GuavaBus implements EventBus {
     private final com.google.common.eventbus.EventBus internalBus;
 
     public GuavaBus() {
-        this.internalBus = new com.google.common.eventbus.EventBus();
+        this.internalBus = new AsyncEventBus(Executors.newCachedThreadPool());
+
     }
 
     @Override

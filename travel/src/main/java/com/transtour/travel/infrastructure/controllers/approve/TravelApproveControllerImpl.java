@@ -29,6 +29,6 @@ public class TravelApproveControllerImpl implements TravelApproveController {
                         return ResponseEntity.internalServerError().body(null);
                     }
                 })
-                .orTimeout(5, TimeUnit.SECONDS);
+                .orTimeout(50, TimeUnit.SECONDS);
     }
 }
