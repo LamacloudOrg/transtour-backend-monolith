@@ -24,5 +24,9 @@ public class Driver extends User {
             inverseJoinColumns = @JoinColumn(name = "car_id")
     )
     private Set<Car> cars = new HashSet<>();
+    @Column(name = "firebase_token")
     private String firebaseToken;
+    @Column(name = "type_device")
+    private String type_device;
 }
+
