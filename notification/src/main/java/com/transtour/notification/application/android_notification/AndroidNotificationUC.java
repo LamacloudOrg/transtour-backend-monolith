@@ -1,21 +1,23 @@
 package com.transtour.notification.application.android_notification;
 
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingException;
 import com.google.firebase.messaging.Message;
 import com.google.firebase.messaging.Notification;
 import com.transtour.notification.application.android_notification.command.AndroidNotificationCommand;
 import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-    public class AndroidNotificationUC {
+public class AndroidNotificationUC {
 
     private final FirebaseMessaging firebaseMessaging;
 
-    public AndroidNotificationUC(FirebaseMessaging firebaseMessaging){
-        this.firebaseMessaging = firebaseMessaging;
+    @Autowired
+    public AndroidNotificationUC(FirebaseApp firebaseApp) {
+        this.firebaseMessaging = FirebaseMessaging.getInstance(firebaseApp);
     }
 
     @SneakyThrows
