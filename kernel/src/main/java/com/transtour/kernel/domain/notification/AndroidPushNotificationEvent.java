@@ -19,7 +19,7 @@ public class AndroidPushNotificationEvent extends DomainEvent {
         super(aggregateId, attributes);
     }
 
-    public static NotificationEmailEvent create(String aggregateId,
+    public static AndroidPushNotificationEvent create(String aggregateId,
                                                 String to,
                                                 Long travelId,
                                                 TravelStatus travelStatus,
@@ -43,7 +43,8 @@ public class AndroidPushNotificationEvent extends DomainEvent {
         map.put("to", to);
         map.put("travelId", travelId);
         map.put("status", travelStatus);
-        map.put("origin", destiny);
+        map.put("origin", origin);
+        map.put("destiny", destiny);
         map.put("passenger", passenger);
         map.put("observation", observation);
         map.put("date", date);
@@ -55,7 +56,7 @@ public class AndroidPushNotificationEvent extends DomainEvent {
         map.put("takForReturn", takForReturn);
         map.put("toll", toll);
 
-        return new NotificationEmailEvent(aggregateId, map);
+        return new AndroidPushNotificationEvent(aggregateId, map);
 
     }
 

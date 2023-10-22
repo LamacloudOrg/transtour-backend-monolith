@@ -35,7 +35,7 @@ public class AndroidNotificationListener {
         gatewayHandler.dispatch(new AndroidNotificationCommand(
                 event.getAttributes().get("to").toString(),
                 UUID.fromString(event.getAttributes().get("notificationId").toString()),
-                (Integer) event.getAttributes().get("travelId"),
+                Long.valueOf(event.getAttributes().get("travelId").toString()),
                 (TravelStatus) event.getAttributes().get("status"),
                 (String)  event.getAttributes().get("origin"),
                 (String) event.getAttributes().get("destiny"),
@@ -45,10 +45,10 @@ public class AndroidNotificationListener {
                 (LocalTime) event.getAttributes().get("time"),
                 (String) event.getAttributes().get("company"),
                 (String) event.getAttributes().get("carDriver"),
-                Optional.ofNullable((Double) event.getAttributes().get("waitingTime")),
-                Optional.ofNullable((Double) event.getAttributes().get("parkingAmount")),
-                Optional.ofNullable((Double) event.getAttributes().get("takForReturn")),
-                Optional.ofNullable((Double) event.getAttributes().get("toll"))
+                Optional.ofNullable(Double.valueOf(event.getAttributes().get("waitingTime").toString())),
+                Optional.ofNullable(Double.valueOf(event.getAttributes().get("parkingAmount").toString())),
+                Optional.ofNullable(Double.valueOf(event.getAttributes().get("takForReturn").toString())),
+                Optional.ofNullable(Double.valueOf(event.getAttributes().get("toll").toString()))
         ));
     }
 
