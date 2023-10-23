@@ -16,6 +16,6 @@ public class TravelApproveCommand implements Command {
 
     @Override
     public HashMap<String, Serializable> toPrimitives() {
-        return null;
+        return new HashMap<>();
     }
 }

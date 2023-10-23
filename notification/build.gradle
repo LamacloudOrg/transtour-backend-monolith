@@ -9,6 +9,7 @@ jar.enabled = true
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-mail'
     implementation group: 'org.freemarker', name: 'freemarker', version: '2.3.31'
+    implementation 'com.google.firebase:firebase-admin:9.2.0'
 
     implementation project(":kernel")
     implementation project(":user")

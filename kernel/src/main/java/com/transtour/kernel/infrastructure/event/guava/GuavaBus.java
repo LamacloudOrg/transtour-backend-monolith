@@ -20,12 +20,18 @@ public class GuavaBus implements EventBus {
 
     public GuavaBus() {
         this.internalBus = new AsyncEventBus(Executors.newCachedThreadPool());
+
     }
 
     @Override
     public void publish(List<DomainEvent> events) {
-        events.forEach((event) ->
-                internalBus.post(event)
-        );
+        synchronized (this){
+            events.forEach(internalBus::post);
+        }
+
+    }
+
+    public com.google.common.eventbus.EventBus getInternalBus() {
+        return internalBus;
     }
 }

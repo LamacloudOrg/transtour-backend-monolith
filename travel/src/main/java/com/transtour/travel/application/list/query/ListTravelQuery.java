@@ -1,7 +1,7 @@
 package com.transtour.travel.application.list.query;
 
 import com.transtour.kernel.domain.bus.query.Query;
-import com.transtour.travel.domain.TravelStatus;
+import com.transtour.kernel.domain.travel.TravelStatus;
 import lombok.Getter;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
