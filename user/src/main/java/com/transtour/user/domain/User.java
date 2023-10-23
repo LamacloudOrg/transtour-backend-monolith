@@ -40,6 +40,7 @@ public class User implements UserDetails {
     private String phone;
     @Column(name = "email")
     private String email;
+    @Column(name = "")
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
