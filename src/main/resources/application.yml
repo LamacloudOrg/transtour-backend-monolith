@@ -55,20 +55,26 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
 ---
+
 spring:
   profiles: mail
-
   mail:
     host: smtp.gmail.com
-    port: 587
-    username: ENC(w10l4gfMQJCQXTQtPAf4vL/aDuTTQSWOhzMbwfjuIVc=)
-    password: ENC(s0aAQXWzvEJzGil6A4AcWTkYzYb3rJfS2T2mJq410Yw=)
+    password: ENC(s2Sj+LCCGIpzeNyboZkLC/hPVaJfdpMueqNPUk0+5k8=)
     properties:
       mail:
         smtp:
           auth: true
-          starttls:
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+            fallback: false
+            port: 465
+          ssl:
             enable: true
+    username: ENC(FqmEuzWO0bRUxEefkMqa447q1L5SkfvPSZjiCLTUBVg=)
+
+
+
 
 ---
 spring:

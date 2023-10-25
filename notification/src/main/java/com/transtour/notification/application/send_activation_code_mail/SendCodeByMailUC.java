@@ -2,12 +2,9 @@ package com.transtour.notification.application.send_activation_code_mail;
 
 
 import com.transtour.notification.application.send_activation_code_mail.command.SendCodeCommand;
-import com.transtour.notification.domain.UserNotFoundException;
-import com.transtour.user.domain.User;
 import com.transtour.user.infrastructure.persistence.jpa.UserRepository;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
-import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -39,9 +36,9 @@ public class SendCodeByMailUC {
         this.configuration = configuration;
     }
 
-    @SneakyThrows
+
     public void send(SendCodeCommand command) {
-        User user = repository.findByDni(command.getDni()).orElseThrow(() -> new UserNotFoundException("User with dni: " + command.getDni() + " not found"));
+        //User user = repository.findByDni(command.getDni()).orElseThrow(() -> new UserNotFoundException("User with dni: " + command.getDni() + " not found"));
 
         MimeMessage message = javaMailSender.createMimeMessage();
 
@@ -53,6 +50,7 @@ public class SendCodeByMailUC {
         for (int i = 0; i < 4; i++) {
             stringBuilder.append(rand.nextInt(upperbound));
         }
+        try {
         model.put("code", stringBuilder.toString());
 
         MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
@@ -63,11 +61,16 @@ public class SendCodeByMailUC {
         Template t = configuration.getTemplate("activation-code.html");
         String html = FreeMarkerTemplateUtils.processTemplateIntoString(t, model);
 
-        helper.setTo(user.getEmail());
-        helper.setText(html, true);
+            helper.setTo("pomalianni@gmail.com");
+            helper.setText(html, true);
         helper.setSubject("Codigo de Activación");
-        helper.setFrom(from);
-        javaMailSender.send(message);
+            helper.setFrom("pomalianni@gmail.com");
 
+            javaMailSender.send(message);
+        } catch (Exception e) {
+            System.out.println("error al enviar mail");
+        }
+
+        //fbza ynkd zbtt kpkn
     }
 }
