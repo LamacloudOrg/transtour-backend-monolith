@@ -4,27 +4,21 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.transtour.kernel.domain.bus.EventBus;
 import com.transtour.kernel.domain.notification.AndroidPushNotificationEvent;
 import com.transtour.kernel.domain.notification.NotificationTravelEmailEvent;
+import com.transtour.kernel.domain.travel.TravelStatus;
 import com.transtour.kernel.exceptions.UserNotExists;
 import com.transtour.travel.application.aprove.command.TravelApproveCommand;
 import com.transtour.travel.domain.Travel;
 import com.transtour.travel.domain.TravelApproveException;
 import com.transtour.travel.domain.TravelNotFoundException;
-import com.transtour.kernel.domain.travel.TravelStatus;
 import com.transtour.travel.infrastructure.persistence.postgres.TravelRepository;
 import com.transtour.user.domain.Driver;
-import com.transtour.user.domain.User;
 import com.transtour.user.infrastructure.persistence.jpa.DriverRepository;
-import com.transtour.user.infrastructure.persistence.jpa.UserRepository;
-import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -48,9 +42,8 @@ public class TravelApproveUC {
 
         Travel travel = travelRepository.findById(command.getId()).orElseThrow(() -> new TravelNotFoundException("travel :" + command.getId().toString() + " not found"));
 
-      //  if (!travel.getStatus().equals(TravelStatus.CREATED)) {
-        //      throw new TravelApproveException("El viaje ya fue aprobado o cancelado");
-        // }
+        if (!travel.getStatus().equals(TravelStatus.CREATED))
+            throw new TravelApproveException("El viaje ya fue aprobado o cancelado");
 
         Driver driver = driverRepository.findByDni(travel.getCarDriver()).orElseThrow(UserNotExists::new);
 

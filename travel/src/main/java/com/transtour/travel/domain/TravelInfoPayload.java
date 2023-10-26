@@ -32,5 +32,6 @@ public class TravelInfoPayload {
     private String parkingAmount;
     private String taxForReturn;
     private String totalAmount;
+    private byte[] signature;
 
 }

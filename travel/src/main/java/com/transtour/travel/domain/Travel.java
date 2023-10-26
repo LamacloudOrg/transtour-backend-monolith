@@ -37,7 +37,6 @@ public class Travel extends BaseEntity {
     @Column(columnDefinition = "jsonb")
     private TravelInfoPayload payload;
 
-
     public static Travel create(CreationCommand command) {
         LocalDateTime localDateTime = LocalDateTime.now();
 
@@ -52,7 +51,7 @@ public class Travel extends BaseEntity {
                 command.getStatus(), command.getDateCreated(), command.getCar(), command.getCarDriver(), command.getCarDriverName(), ZonedDateTime.now().toLocalTime(),
                 command.getCompany(), command.getBc(), command.getPassengerName(), command.getPassengerEmail(), command.getReserveNumber(),
                 command.getOriginAddress(), command.getDestinyAddress(), command.getObservation(), command.getAmount(), command.getWhitingTime(), command.getToll(),
-                command.getParkingAmount(), command.getTaxForReturn(), command.getTotalAmount()));
+                command.getParkingAmount(), command.getTaxForReturn(), command.getTotalAmount(), null));
         return travel;
     }
 
