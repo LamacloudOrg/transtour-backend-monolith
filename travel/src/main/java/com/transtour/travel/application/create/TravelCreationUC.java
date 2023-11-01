@@ -21,8 +21,10 @@ public class TravelCreationUC {
     }
 
     public void createTravel(CreationCommand command) {
+        logger.info("Travel creation");
+
         Travel travel = repository.save(Travel.create(command));
-        logger.info("Travel Created " + travel.getOrderNumber());
+        logger.debug("travel created "+travel.getOrderNumber());
     }
 
 }

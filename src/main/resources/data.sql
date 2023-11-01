@@ -72,7 +72,7 @@ ON CONFLICT DO NOTHING;
 
 
 insert into taxi_driver (id,firebase_token)
-values ('edd55fec-b58a-4b57-8b9e-e62b7ab7d6c5','Kñsd21o123.')
+values ('c9f1d6e1-ff48-4639-8ef5-28a4fb26c7b0','emZg8DrXT3WyvowokBhGmd:APA91bElq5MXUPLnTqkNPaztmX4FSY2xkajYYkE83dyCratyrvcgkvqGzDCodtSr3fOZ5a5_ZoR2y_l5196HS_q4to_yYMXK_tFFdYwPH3qZgEsEOv6k4AT0KYBJb0Vc1oCxcCxOZEfP')
 ON CONFLICT DO NOTHING;
 
 insert into cars (id,patent,brand,model,release_year)
