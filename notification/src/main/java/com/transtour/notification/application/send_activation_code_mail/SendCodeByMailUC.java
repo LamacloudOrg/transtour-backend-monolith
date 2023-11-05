@@ -2,9 +2,11 @@ package com.transtour.notification.application.send_activation_code_mail;
 
 
 import com.transtour.notification.application.send_activation_code_mail.command.SendCodeCommand;
+import com.transtour.notification.shared.util.PasswordGeneratorUtil;
 import com.transtour.user.infrastructure.persistence.jpa.UserRepository;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -16,7 +18,6 @@ import javax.mail.internet.MimeMessage;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 @Service
 public class SendCodeByMailUC {
@@ -25,33 +26,29 @@ public class SendCodeByMailUC {
     private final JavaMailSender javaMailSender;
     private final Configuration configuration;
 
+    private final PasswordGeneratorUtil passwordGeneratorUtil;
     @Value("{spring.mail.username}")
     private String from;
 
 
-
-    public SendCodeByMailUC(UserRepository repository, JavaMailSender javaMailSender, Configuration configuration) {
+    public SendCodeByMailUC(UserRepository repository,
+                            JavaMailSender javaMailSender,
+                            Configuration configuration,
+                            PasswordGeneratorUtil passwordGeneratorUtil
+    ) {
         this.repository = repository;
         this.javaMailSender = javaMailSender;
         this.configuration = configuration;
+        this.passwordGeneratorUtil = passwordGeneratorUtil;
     }
 
-
+    @SneakyThrows
     public void send(SendCodeCommand command) {
-        //User user = repository.findByDni(command.getDni()).orElseThrow(() -> new UserNotFoundException("User with dni: " + command.getDni() + " not found"));
 
         MimeMessage message = javaMailSender.createMimeMessage();
 
         Map<String, Object> model = new HashMap<>();
-
-        Random rand = new Random(); //instance of random class
-        int upperbound = 10;
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < 4; i++) {
-            stringBuilder.append(rand.nextInt(upperbound));
-        }
-        try {
-        model.put("code", stringBuilder.toString());
+        model.put("code", passwordGeneratorUtil.generate(4));
 
         MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
                 StandardCharsets.UTF_8.name());
@@ -61,16 +58,12 @@ public class SendCodeByMailUC {
         Template t = configuration.getTemplate("activation-code.html");
         String html = FreeMarkerTemplateUtils.processTemplateIntoString(t, model);
 
-            helper.setTo("pomalianni@gmail.com");
-            helper.setText(html, true);
+        helper.setTo(command.getTo());
+        helper.setText(html, true);
         helper.setSubject("Codigo de Activación");
-            helper.setFrom("pomalianni@gmail.com");
+        helper.setFrom(from);
 
-            javaMailSender.send(message);
-        } catch (Exception e) {
-            System.out.println("error al enviar mail");
-        }
+        javaMailSender.send(message);
 
-        //fbza ynkd zbtt kpkn
     }
 }

@@ -9,10 +9,10 @@ import java.util.HashMap;
 @Getter
 public class SendCodeCommand  implements Command {
 
-    private final String dni;
+    private final String to;
 
-    public SendCodeCommand(String dni) {
-        this.dni = dni;
+    public SendCodeCommand(String to) {
+        this.to = to;
     }
 
     @Override

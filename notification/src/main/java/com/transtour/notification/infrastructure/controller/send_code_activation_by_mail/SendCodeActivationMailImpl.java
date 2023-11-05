@@ -2,7 +2,6 @@ package com.transtour.notification.infrastructure.controller.send_code_activatio
 
 import com.transtour.kernel.infrastructure.bus.GatewayHandler;
 import com.transtour.notification.application.send_activation_code_mail.command.SendCodeCommand;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,10 +17,10 @@ public class SendCodeActivationMailImpl  implements SendCodeActivationMail{
     }
 
     @Override
-    public CompletableFuture<ResponseEntity> send(String dni) {
+    public CompletableFuture<ResponseEntity> send(RequestActivationCode requestActivationCode) {
         return gatewayHandler
-                .asyncDispatch(new SendCodeCommand(dni))
-                .<ResponseEntity>thenApply(ResponseEntity::ok);
+                .asyncDispatch(new SendCodeCommand(requestActivationCode.getTo()))
+                .thenApply(ResponseEntity::ok);
 
     }
 }
