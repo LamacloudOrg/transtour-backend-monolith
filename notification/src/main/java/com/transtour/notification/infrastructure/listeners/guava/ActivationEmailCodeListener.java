@@ -21,7 +21,7 @@ public class ActivationEmailCodeListener {
     }
 
     @Subscribe
-    public void stringEvent(ActivacodeNotificationEmailEvent event) {
+    public void activationCodeEvent(ActivacodeNotificationEmailEvent event) {
         gatewayHandler.dispatch(new SendCodeCommand(
                 event.getAttributes().get("to").toString()
         ));

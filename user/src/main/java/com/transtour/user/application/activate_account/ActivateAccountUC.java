@@ -7,6 +7,7 @@ import com.transtour.user.application.activate_account.command.ActivateAccountCo
 import com.transtour.user.domain.User;
 import com.transtour.user.domain.UserStatus;
 import com.transtour.user.infrastructure.persistence.jpa.UserRepository;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class ActivateAccountUC {
     private final UserRepository userRepository;
     private final EventBus eventBus;
 
-    public ActivateAccountUC(UserRepository userRepository, EventBus eventBus) {
+    public ActivateAccountUC(UserRepository userRepository, @Qualifier("GuavaImpl") EventBus eventBus) {
         this.userRepository = userRepository;
         this.eventBus = eventBus;
     }

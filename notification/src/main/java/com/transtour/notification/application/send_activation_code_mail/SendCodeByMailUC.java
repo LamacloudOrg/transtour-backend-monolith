@@ -3,7 +3,6 @@ package com.transtour.notification.application.send_activation_code_mail;
 
 import com.transtour.notification.application.send_activation_code_mail.command.SendCodeCommand;
 import com.transtour.notification.shared.util.PasswordGeneratorUtil;
-import com.transtour.user.infrastructure.persistence.jpa.UserRepository;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import lombok.SneakyThrows;
@@ -22,7 +21,6 @@ import java.util.Map;
 @Service
 public class SendCodeByMailUC {
 
-    private final UserRepository repository;
     private final JavaMailSender javaMailSender;
     private final Configuration configuration;
 
@@ -31,12 +29,11 @@ public class SendCodeByMailUC {
     private String from;
 
 
-    public SendCodeByMailUC(UserRepository repository,
+    public SendCodeByMailUC(
                             JavaMailSender javaMailSender,
                             Configuration configuration,
                             PasswordGeneratorUtil passwordGeneratorUtil
     ) {
-        this.repository = repository;
         this.javaMailSender = javaMailSender;
         this.configuration = configuration;
         this.passwordGeneratorUtil = passwordGeneratorUtil;
