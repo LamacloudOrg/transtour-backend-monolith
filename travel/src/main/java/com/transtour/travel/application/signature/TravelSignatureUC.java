@@ -29,13 +29,7 @@ public class TravelSignatureUC {
         if (!travel.getStatus().equals(TravelStatus.APPROVED))
             throw new TravelApproveException("No se ecuentra aprovado el viaje");
 
-        byte[] image = ImageUtil.resizePngImage(
-                Base64.getDecoder().decode(command.getSignature())
-                , command.getWidth()
-                , command.getHegiht());
-        travel.getPayload().setSignature(image);
-        travel.setStatus(TravelStatus.SIGNED);
-        repository.save(travel);
+
     }
 
 }

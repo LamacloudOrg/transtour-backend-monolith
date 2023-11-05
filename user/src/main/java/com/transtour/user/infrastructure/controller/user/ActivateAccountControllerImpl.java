@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.concurrent.CompletableFuture;
 
-@RequestMapping("/api/v1/user")
+@RequestMapping("/api/v1/oauth")
 public interface ActivateAccountControllerImpl {
 
     @PostMapping("/activateAccount")

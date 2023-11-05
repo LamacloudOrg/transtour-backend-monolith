@@ -10,4 +10,5 @@ dependencies {
     implementation 'com.vladmihalcea:hibernate-types-52:2.9.7'
     implementation project(":kernel")
     implementation project(":user")
+    implementation 'com.github.dozermapper:dozer-core:6.5.0'
 }

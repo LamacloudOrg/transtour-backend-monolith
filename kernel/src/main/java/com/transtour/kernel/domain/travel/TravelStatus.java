@@ -4,7 +4,7 @@ public enum TravelStatus {
     CREATED,
     APPROVED,
     CANCELED,
-
+    READY,
     SIGNED,
     DONE
 }

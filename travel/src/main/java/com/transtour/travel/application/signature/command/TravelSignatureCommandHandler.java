@@ -1,7 +1,6 @@
 package com.transtour.travel.application.signature.command;
 
 import com.transtour.kernel.domain.bus.command.CommandHandler;
-import com.transtour.travel.application.aprove.command.TravelApproveCommand;
 import com.transtour.travel.application.signature.TravelSignatureUC;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Component;
