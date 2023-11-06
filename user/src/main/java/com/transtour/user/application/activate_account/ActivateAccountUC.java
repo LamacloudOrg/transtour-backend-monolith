@@ -8,6 +8,7 @@ import com.transtour.user.domain.User;
 import com.transtour.user.domain.UserStatus;
 import com.transtour.user.infrastructure.persistence.jpa.UserRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,16 +20,19 @@ public class ActivateAccountUC {
     private final UserRepository userRepository;
     private final EventBus eventBus;
 
-    public ActivateAccountUC(UserRepository userRepository, @Qualifier("GuavaImpl") EventBus eventBus) {
+    private final BCryptPasswordEncoder bCrypt;
+
+    public ActivateAccountUC(UserRepository userRepository, @Qualifier("GuavaImpl") EventBus eventBus, BCryptPasswordEncoder bCrypt) {
         this.userRepository = userRepository;
         this.eventBus = eventBus;
+        this.bCrypt = bCrypt;
     }
 
     public void activate(ActivateAccountCommand command) {
 
         User user = userRepository.findByDni(command.getDni()).orElseThrow(UserNotExists::new);
         user.setStatus(UserStatus.ENABLED);
-        user.setPassword(command.getPassWord());
+        user.setPassword(bCrypt.encode(command.getPassWord()));
         userRepository.save(user);
 
         eventBus.publish(List.of(
