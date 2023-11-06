@@ -17,13 +17,15 @@ public class ActivacodeNotificationEmailEvent extends DomainEvent {
 
 
     public static ActivacodeNotificationEmailEvent create(String aggregateId,
-                                                          String to
+                                                          String to,
+                                                          String activationCode
     ) {
         Map<String, Serializable> map = new HashMap<>();
 
 
         map.put("aggregateId", aggregateId);
         map.put("to", to);
+        map.put("activationCode", activationCode);
 
 
         return new ActivacodeNotificationEmailEvent(aggregateId, map);

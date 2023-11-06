@@ -2,7 +2,6 @@ package com.transtour.notification.application.send_activation_code_mail;
 
 
 import com.transtour.notification.application.send_activation_code_mail.command.SendCodeCommand;
-import com.transtour.notification.shared.util.PasswordGeneratorUtil;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import lombok.SneakyThrows;
@@ -24,19 +23,16 @@ public class SendCodeByMailUC {
     private final JavaMailSender javaMailSender;
     private final Configuration configuration;
 
-    private final PasswordGeneratorUtil passwordGeneratorUtil;
     @Value("{spring.mail.username}")
     private String from;
 
 
     public SendCodeByMailUC(
                             JavaMailSender javaMailSender,
-                            Configuration configuration,
-                            PasswordGeneratorUtil passwordGeneratorUtil
+                            Configuration configuration
     ) {
         this.javaMailSender = javaMailSender;
         this.configuration = configuration;
-        this.passwordGeneratorUtil = passwordGeneratorUtil;
     }
 
     @SneakyThrows
@@ -45,7 +41,7 @@ public class SendCodeByMailUC {
         MimeMessage message = javaMailSender.createMimeMessage();
 
         Map<String, Object> model = new HashMap<>();
-        model.put("code", passwordGeneratorUtil.generate(4));
+        model.put("code", command.getActivationCode());
 
         MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
                 StandardCharsets.UTF_8.name());

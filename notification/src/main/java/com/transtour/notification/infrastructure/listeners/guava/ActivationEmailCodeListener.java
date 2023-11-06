@@ -23,7 +23,8 @@ public class ActivationEmailCodeListener {
     @Subscribe
     public void activationCodeEvent(ActivacodeNotificationEmailEvent event) {
         gatewayHandler.dispatch(new SendCodeCommand(
-                event.getAttributes().get("to").toString()
+                event.getAttributes().get("to").toString(),
+                event.getAttributes().get("activationCode").toString()
         ));
     }
 }
