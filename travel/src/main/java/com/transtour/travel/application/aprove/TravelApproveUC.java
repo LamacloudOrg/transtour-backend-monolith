@@ -51,7 +51,7 @@ public class TravelApproveUC {
 
         User user = userRepository.findByDni(travel.getCarDriver()).orElseThrow(UserNotExists::new);
 
-        //travel.setStatus(TravelStatus.APPROVED);
+        travel.setStatus(TravelStatus.APPROVED);
         travelRepository.save(travel);
 
         eventBus.publish(List.of(
