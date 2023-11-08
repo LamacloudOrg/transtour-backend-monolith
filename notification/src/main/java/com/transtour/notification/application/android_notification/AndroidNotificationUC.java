@@ -40,7 +40,7 @@ public class AndroidNotificationUC {
                 .putAllData(androidNotificationCommand.getInfo())
                 .build();
 
-        String result = firebaseMessaging.send(message, true);
+        String result = firebaseMessaging.send(message);
     logger.debug("Resultado de la notificacion "+result);
 
     }
