@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class RequestUserToken {
 
-    private Long id;
+    private String dni;
     private String fcmToken;
     private String device;
 }

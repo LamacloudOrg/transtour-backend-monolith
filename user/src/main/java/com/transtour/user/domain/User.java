@@ -19,7 +19,6 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "users")
 public class User implements UserDetails {
 
@@ -51,6 +50,10 @@ public class User implements UserDetails {
     private Set<Role> roles;
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Token> tokens;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "token_id", referencedColumnName = "id")
+    private TokenDriver tokenDriver;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

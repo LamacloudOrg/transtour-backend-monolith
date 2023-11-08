@@ -2,28 +2,27 @@ package com.transtour.user.application.register_token;
 
 import com.transtour.kernel.exceptions.DriverNotExists;
 import com.transtour.user.application.register_token.command.RegisterTokenCommand;
-import com.transtour.user.domain.Driver;
-import com.transtour.user.infrastructure.persistence.jpa.DriverRepository;
+import com.transtour.user.domain.User;
+import com.transtour.user.infrastructure.persistence.jpa.UserRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import javax.transaction.Transactional;
 
 @Service
+@Transactional
 public class RegisterTokenUC {
-    private final DriverRepository driverRepository;
+    private final UserRepository userRepository;
 
-    public RegisterTokenUC(DriverRepository driverRepository) {
-        this.driverRepository = driverRepository;
+    public RegisterTokenUC(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     public void registerToken(RegisterTokenCommand command) {
 
-        Optional<Driver> optionalDriver = driverRepository.findByDni(command.getId().toString());
-        optionalDriver.orElseThrow(DriverNotExists::new);
+        User user = userRepository.findByDni(command.getDni()).orElseThrow(DriverNotExists::new);
 
-        Driver driver = optionalDriver.get();
-        driver.setFirebaseToken(command.getFcmToken());
-        driver.setType_device(command.getDevice());
-        driverRepository.save(driver);
+        user.getTokenDriver().setFirebaseToken(command.getFcmToken());
+        user.getTokenDriver().setDeviceType(command.getDevice());
+        userRepository.save(user);
     }
 }

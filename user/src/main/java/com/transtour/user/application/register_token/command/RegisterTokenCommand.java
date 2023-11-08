@@ -9,12 +9,12 @@ import java.util.HashMap;
 @Getter
 public class RegisterTokenCommand implements Command {
 
-    private final Long id;
+    private final String dni;
     private final String fcmToken;
     private final String device;
 
-    public RegisterTokenCommand(Long id, String fcmToken, String device) {
-        this.id = id;
+    public RegisterTokenCommand(String dni, String fcmToken, String device) {
+        this.dni = dni;
         this.fcmToken = fcmToken;
         this.device = device;
     }

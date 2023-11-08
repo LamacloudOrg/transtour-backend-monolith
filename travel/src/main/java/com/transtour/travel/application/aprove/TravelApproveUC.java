@@ -11,8 +11,9 @@ import com.transtour.travel.domain.Travel;
 import com.transtour.travel.domain.TravelApproveException;
 import com.transtour.travel.domain.TravelNotFoundException;
 import com.transtour.travel.infrastructure.persistence.postgres.TravelRepository;
-import com.transtour.user.domain.Driver;
+import com.transtour.user.domain.User;
 import com.transtour.user.infrastructure.persistence.jpa.DriverRepository;
+import com.transtour.user.infrastructure.persistence.jpa.UserRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -29,13 +30,16 @@ public class TravelApproveUC {
 
     private final DriverRepository driverRepository;
     private final EventBus eventBus;
+    private final UserRepository userRepository;
 
     public TravelApproveUC(TravelRepository travelRepository,
                            DriverRepository driverRepository,
-                           @Qualifier("GuavaImpl") EventBus eventBus) {
+                           @Qualifier("GuavaImpl") EventBus eventBus,
+                           @Qualifier("userRepo") UserRepository userRepository) {
         this.travelRepository = travelRepository;
         this.driverRepository = driverRepository;
         this.eventBus = eventBus;
+        this.userRepository = userRepository;
     }
 
     public void approve(TravelApproveCommand command) throws JsonProcessingException {
@@ -45,7 +49,7 @@ public class TravelApproveUC {
         if (!travel.getStatus().equals(TravelStatus.CREATED))
             throw new TravelApproveException("El viaje ya fue aprobado o cancelado");
 
-        Driver driver = driverRepository.findByDni(travel.getCarDriver()).orElseThrow(UserNotExists::new);
+        User user = userRepository.findByDni(travel.getCarDriver()).orElseThrow(UserNotExists::new);
 
         //travel.setStatus(TravelStatus.APPROVED);
         travelRepository.save(travel);
@@ -61,7 +65,7 @@ public class TravelApproveUC {
 
                 AndroidPushNotificationEvent.create(
                         UUID.randomUUID().toString(),
-                        driver.getFirebaseToken(),
+                        user.getTokenDriver().getFirebaseToken(),
                         travel.getOrderNumber(),
                         travel.getStatus(),
                         travel.getPayload().getOriginAddress(),

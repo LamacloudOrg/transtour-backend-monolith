@@ -1,5 +1,19 @@
-insert into users (id,dni,password,full_name,status,phone,email)
-values ('c9f1d6e1-ff48-4639-8ef5-28a4fb26c7b0','34404216','$2a$10$jGKDuk9g/q6dF0mbAwnhbOvvzC2seU9piA8RTFbfeJhlTghZe/3ZC','Pablo Ocanto','ENABLED','1136319469','pomalianni@gmail.com')
+
+
+--TOKEN DRIVER INIT--
+insert into token_driver (id,firebase_token)
+values ('5ae9cbf2-dd01-4dca-b07d-bf7b94636f14','emZg8DrXT3WyvowokBhGmd:APA91bElq5MXUPLnTqkNPaztmX4FSY2xkajYYkE83dyCratyrvcgkvqGzDCodtSr3fOZ5a5_ZoR2y_l5196HS_q4to_yYMXK_tFFdYwPH3qZgEsEOv6k4AT0KYBJb0Vc1oCxcCxOZEfP')
+ON CONFLICT DO NOTHING;
+
+insert into token_driver (id,firebase_token)
+values ('fb0911ef-670c-4070-a2cf-b93fe2759377','token')
+ON CONFLICT DO NOTHING;
+-- TOKEN DRIVER  FIN--
+
+--USER INIT--
+
+insert into users (id,dni,password,full_name,status,phone,email,token_id)
+values ('c9f1d6e1-ff48-4639-8ef5-28a4fb26c7b0','34404216','$2a$10$jGKDuk9g/q6dF0mbAwnhbOvvzC2seU9piA8RTFbfeJhlTghZe/3ZC','Pablo Ocanto','ENABLED','1136319469','pomalianni@gmail.com','5ae9cbf2-dd01-4dca-b07d-bf7b94636f14')
 ON CONFLICT DO NOTHING;
 
 
@@ -10,6 +24,8 @@ ON CONFLICT DO NOTHING;
 insert into users (id,dni,password,full_name,status,phone,email)
 values ('6c8b9b1c-0442-4156-88c6-47ad5d3fce70','93479822','$2a$10$jGKDuk9g/q6dF0mbAwnhbOvvzC2seU9piA8RTFbfeJhlTghZe/3ZC','Enerique Neyra','ENABLED','1140377287','bsastranstour@hotmail.com')
 ON CONFLICT DO NOTHING;
+
+--USER FIN--
 
 -- DRIVERS INIT --
 insert into users (id,dni,password,full_name,status,phone,email)
@@ -24,9 +40,7 @@ insert into users (id,dni,password,full_name,status,phone,email)
 values ('edd55fec-b58a-4b57-8b9e-e62b7ab7d6c5','23132458','$2a$10$jGKDuk9g/q6dF0mbAwnhbOvvzC2seU9piA8RTFbfeJhlTghZe/3ZC','Sargento Garcia','ENABLED','1140377287','bsastranstour@hotmail.com')
 ON CONFLICT DO NOTHING;
 
-insert into taxi_driver (id,firebase_token)
-values ('edd55fec-b58a-4b57-8b9e-e62b7ab7d6c5','token')
-ON CONFLICT DO NOTHING;
+
 
 
 -- DRIVERS FIN --
@@ -71,25 +85,21 @@ values ('edd55fec-b58a-4b57-8b9e-e62b7ab7d6c5','415ccece-73da-437f-b40d-f1ad21e1
 ON CONFLICT DO NOTHING;
 
 
-insert into taxi_driver (id,firebase_token)
-values ('c9f1d6e1-ff48-4639-8ef5-28a4fb26c7b0','emZg8DrXT3WyvowokBhGmd:APA91bElq5MXUPLnTqkNPaztmX4FSY2xkajYYkE83dyCratyrvcgkvqGzDCodtSr3fOZ5a5_ZoR2y_l5196HS_q4to_yYMXK_tFFdYwPH3qZgEsEOv6k4AT0KYBJb0Vc1oCxcCxOZEfP')
-ON CONFLICT DO NOTHING;
+--insert into cars (id,patent,brand,model,release_year)
+--values ('fb0911ef-670c-4070-a2cf-b93fe2759377','5eeba015-b59e-4805-bf62-a9ed4ebe7349','AFZ 989','Toyota','Corola','2023-04-01')
+--ON CONFLICT DO NOTHING;
 
-insert into cars (id,patent,brand,model,release_year)
-values ('5eeba015-b59e-4805-bf62-a9ed4ebe7349','AFZ 989','Toyota','Corola','2023-04-01')
-ON CONFLICT DO NOTHING;
+--insert into cars (id,patent,brand,model,release_year)
+--values ('3e08c173-a838-46bd-b90a-d98715d5b0bf','LUC 284','Renault','Fluence','2012-12-12')
+--ON CONFLICT DO NOTHING;
 
-insert into cars (id,patent,brand,model,release_year)
-values ('3e08c173-a838-46bd-b90a-d98715d5b0bf','LUC 284','Renault','Fluence','2012-12-12')
-ON CONFLICT DO NOTHING;
+--insert into user_car (user_id,car_id)
+--values ('edd55fec-b58a-4b57-8b9e-e62b7ab7d6c5','5eeba015-b59e-4805-bf62-a9ed4ebe7349')
+--ON CONFLICT DO NOTHING;
 
-insert into user_car (user_id,car_id)
-values ('edd55fec-b58a-4b57-8b9e-e62b7ab7d6c5','5eeba015-b59e-4805-bf62-a9ed4ebe7349')
-ON CONFLICT DO NOTHING;
-
-insert into user_car (user_id,car_id)
-values ('edd55fec-b58a-4b57-8b9e-e62b7ab7d6c5','3e08c173-a838-46bd-b90a-d98715d5b0bf')
-ON CONFLICT DO NOTHING;
+--insert into user_car (user_id,car_id)
+--values ('edd55fec-b58a-4b57-8b9e-e62b7ab7d6c5','3e08c173-a838-46bd-b90a-d98715d5b0bf')
+--ON CONFLICT DO NOTHING;
 
 
 -- DRIVERS ROL FIN --
