@@ -1,4 +1,4 @@
-package com.transtour.travel.infrastructure.controllers.sign_voucher;
+package com.transtour.travel.infrastructure.controllers.sign;
 
 import com.transtour.kernel.infrastructure.bus.IGatewayHandler;
 import com.transtour.travel.application.signature.command.TravelSignatureCommand;
@@ -9,11 +9,11 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
 @RestController
-public class TravelSignVoucherControllerImpl implements TravelSignVoucherController{
+public class TravelSignerControllerImpl implements TravelSignerController {
 
     private final IGatewayHandler gatewayHandler;
 
-    public TravelSignVoucherControllerImpl(IGatewayHandler gatewayHandler) {
+    public TravelSignerControllerImpl(IGatewayHandler gatewayHandler) {
         this.gatewayHandler = gatewayHandler;
     }
 

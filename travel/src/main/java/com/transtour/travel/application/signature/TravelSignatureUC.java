@@ -26,9 +26,19 @@ public class TravelSignatureUC {
 
     public void saveSignature(TravelSignatureCommand command) throws IOException {
         Travel travel =repository.findById(command.getTravelId()).orElseThrow();
-        if (!travel.getStatus().equals(TravelStatus.APPROVED))
-            throw new TravelApproveException("No se ecuentra aprovado el viaje");
+        if (travel.getStatus().equals(TravelStatus.APPROVED) || travel.getStatus().equals(TravelStatus.SIGNED)) {
 
+            byte[] image = ImageUtil.resizePngImage(
+                    Base64.getDecoder().decode(command.getSignature())
+                    , command.getWidth()
+                    , command.getHegiht());
+            travel.getPayload().setSignature(image);
+            travel.setStatus(TravelStatus.SIGNED);
+            repository.save(travel);
+
+        } else {
+            throw new TravelApproveException("No se ecuentra aprovado el viaje");
+        }
 
     }
 

@@ -1,4 +1,4 @@
-package com.transtour.travel.infrastructure.controllers.sign_voucher;
+package com.transtour.travel.infrastructure.controllers.sign;
 
 import lombok.Data;
 import org.springframework.lang.NonNull;
