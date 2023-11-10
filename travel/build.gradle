@@ -8,6 +8,9 @@ jar.enabled = true
 
 dependencies {
     implementation 'com.vladmihalcea:hibernate-types-52:2.9.7'
+    implementation 'net.sf.jasperreports:jasperreports:6.17.0'
+    implementation 'com.lowagie:itext:2.1.7'
+
     implementation project(":kernel")
     implementation project(":user")
     implementation 'com.github.dozermapper:dozer-core:6.5.0'

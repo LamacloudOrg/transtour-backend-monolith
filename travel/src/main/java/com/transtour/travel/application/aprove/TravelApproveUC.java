@@ -12,7 +12,6 @@ import com.transtour.travel.domain.TravelApproveException;
 import com.transtour.travel.domain.TravelNotFoundException;
 import com.transtour.travel.infrastructure.persistence.postgres.TravelRepository;
 import com.transtour.user.domain.User;
-import com.transtour.user.infrastructure.persistence.jpa.DriverRepository;
 import com.transtour.user.infrastructure.persistence.jpa.UserRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -28,16 +27,13 @@ public class TravelApproveUC {
 
     private final TravelRepository travelRepository;
 
-    private final DriverRepository driverRepository;
     private final EventBus eventBus;
     private final UserRepository userRepository;
 
     public TravelApproveUC(TravelRepository travelRepository,
-                           DriverRepository driverRepository,
                            @Qualifier("GuavaImpl") EventBus eventBus,
                            @Qualifier("userRepo") UserRepository userRepository) {
         this.travelRepository = travelRepository;
-        this.driverRepository = driverRepository;
         this.eventBus = eventBus;
         this.userRepository = userRepository;
     }

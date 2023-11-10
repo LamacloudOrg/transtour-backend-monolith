@@ -12,10 +12,8 @@ import java.io.IOException;
 
 @Component
 public class ImageUtil {
-    private static final int IMAGE_WIDTH =200;
-    private static final int IMAGE_HEIGHT =200;
 
-    public static byte[] resizePngImage(byte[] image, int width, int heigh) throws IOException {
+    public byte[] resizePngImage(byte[] image, int width, int heigh) throws IOException {
 
         BufferedImage originalImage = ImageIO.read(new ByteArrayInputStream(image));
         BufferedImage resizedImage = new BufferedImage(width,heigh,BufferedImage.TYPE_BYTE_BINARY);

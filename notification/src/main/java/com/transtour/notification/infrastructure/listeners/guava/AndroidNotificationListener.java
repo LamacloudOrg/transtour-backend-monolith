@@ -2,22 +2,18 @@ package com.transtour.notification.infrastructure.listeners.guava;
 
 import com.google.common.eventbus.Subscribe;
 import com.transtour.kernel.domain.notification.AndroidPushNotificationEvent;
-import com.transtour.kernel.domain.notification.NotificationEmailEvent;
 import com.transtour.kernel.domain.travel.TravelStatus;
 import com.transtour.kernel.infrastructure.bus.IGatewayHandler;
 import com.transtour.kernel.infrastructure.event.guava.GuavaBus;
 import com.transtour.notification.application.android_notification.command.AndroidNotificationCommand;
-import com.transtour.notification.application.registration_mail.command.RegistrationMailCommand;
-import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Optional;
 import java.util.UUID;
 
-@Service
-@Primary
+@Component
 public class AndroidNotificationListener {
 
     private final GuavaBus eventBus;
