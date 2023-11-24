@@ -6,26 +6,28 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
-@Entity
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "token_driver")
-public class TokenDriver {
+@Entity
+@Table(name = "firebase_token",schema = "transtour")
+public class FirebaseToken implements Serializable {
 
     @Id
     @Column(name = "id", nullable = false)
     private String id;
 
-    @Column(name = "firebase_token")
-    private String firebaseToken;
+    @Column(name = "token")
+    private String token;
 
     @Column(name = "device_type")
     private String deviceType;
 
-    @OneToOne(mappedBy = "tokenDriver")
+    @OneToOne(mappedBy = "firebaseToken")
     private User user;
 }
 

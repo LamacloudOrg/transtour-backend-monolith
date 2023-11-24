@@ -2,6 +2,7 @@ package com.transtour.travel.domain;
 
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -10,7 +11,7 @@ import java.time.LocalTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class TravelInfoPayload {
+public class TravelInfoPayload implements Serializable {
 
     private String status;
     private LocalDate dateCreated;

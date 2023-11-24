@@ -9,8 +9,8 @@ import java.time.LocalTime;
 import java.util.HashMap;
 @Data
 public class CreationCommand implements Command {
+    private String userName;
     private String status;
-    private LocalDate dateCreated;
     private String car;
     private String carDriver; // Aca va el dni
     private String carDriverName;  // Aca va el nombre del chofer
@@ -30,9 +30,9 @@ public class CreationCommand implements Command {
     private String taxForReturn;
     private String totalAmount;
 
-    public CreationCommand(String status, LocalDate dateCreated, String car, String carDriver, String carDriverName, LocalTime time, String company, String bc, String passengerName, String passengerEmail, String reserveNumber, String originAddress, String destinyAddress, String observation, String amount, String whitingTime, String toll, String parkingAmount, String taxForReturn, String totalAmount) {
+    public CreationCommand(String userName,String status, String car, String carDriver, String carDriverName, LocalTime time, String company, String bc, String passengerName, String passengerEmail, String reserveNumber, String originAddress, String destinyAddress, String observation, String amount, String whitingTime, String toll, String parkingAmount, String taxForReturn, String totalAmount) {
+        this.userName = userName;
         this.status = status;
-        this.dateCreated = dateCreated;
         this.car = car;
         this.carDriver = carDriver;
         this.carDriverName = carDriverName;

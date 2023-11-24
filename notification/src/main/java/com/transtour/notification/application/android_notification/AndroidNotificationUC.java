@@ -41,7 +41,7 @@ public class AndroidNotificationUC {
                 .build();
 
         String result = firebaseMessaging.send(message);
-    logger.debug("Resultado de la notificacion "+result);
+        logger.debug("Resultado de la notificacion "+result);
 
     }
 }

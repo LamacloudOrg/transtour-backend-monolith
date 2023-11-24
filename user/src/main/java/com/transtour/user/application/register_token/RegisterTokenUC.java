@@ -21,8 +21,8 @@ public class RegisterTokenUC {
 
         User user = userRepository.findByDni(command.getDni()).orElseThrow(DriverNotExists::new);
 
-        user.getTokenDriver().setFirebaseToken(command.getFcmToken());
-        user.getTokenDriver().setDeviceType(command.getDevice());
+        user.getFirebaseToken().setToken(command.getFcmToken());
+        user.getFirebaseToken().setDeviceType(command.getDevice());
         userRepository.save(user);
     }
 }

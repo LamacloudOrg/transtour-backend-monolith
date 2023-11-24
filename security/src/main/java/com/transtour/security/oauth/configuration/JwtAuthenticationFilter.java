@@ -1,6 +1,6 @@
 package com.transtour.security.oauth.configuration;
 
-import com.transtour.user.infrastructure.persistence.jpa.TokenRepository;
+import com.transtour.user.infrastructure.persistence.jpa.FirebaseTokenRepository;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,14 +24,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
 
-    private final TokenRepository tokenRepository;
+    private final FirebaseTokenRepository firebaseTokenRepository;
 
 
     @Autowired
-    public JwtAuthenticationFilter(JwtService jwtService, UserDetailsService userDetailsService, @Qualifier("tokenRepo") TokenRepository tokenRepository) {
+    public JwtAuthenticationFilter(JwtService jwtService, UserDetailsService userDetailsService, @Qualifier("tokenRepo") FirebaseTokenRepository firebaseTokenRepository) {
         this.jwtService = jwtService;
         this.userDetailsService = userDetailsService;
-        this.tokenRepository = tokenRepository;
+        this.firebaseTokenRepository = firebaseTokenRepository;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         userEmail = jwtService.extractUsername(jwt);
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
-            Boolean isTokenValid = tokenRepository.findByToken(jwt)
+            Boolean isTokenValid = firebaseTokenRepository.findByToken(jwt)
                     .map(t -> !t.isExpired() && !t.isRevoked())
                     .orElse(false);
             if (jwtService.isTokenValid(jwt, userDetails) && isTokenValid) {

@@ -1,8 +1,8 @@
 package com.transtour.security.oauth.configuration;
 
 
-import com.transtour.user.domain.Token;
-import com.transtour.user.infrastructure.persistence.jpa.TokenRepository;
+import com.transtour.user.domain.SessionTokens;
+import com.transtour.user.infrastructure.persistence.jpa.FirebaseTokenRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 @RequiredArgsConstructor
 public class LogoutService implements LogoutHandler {
 
-    private final TokenRepository tokenRepository;
+    private final FirebaseTokenRepository firebaseTokenRepository;
 
 
     @Override
@@ -26,12 +26,12 @@ public class LogoutService implements LogoutHandler {
             return;
         }
         jwt = authHeader.substring(7);
-        Token storedToken = tokenRepository.findByToken(jwt)
+        SessionTokens storedSessionTokens = firebaseTokenRepository.findByToken(jwt)
                 .orElse(null);
-        if (storedToken != null) {
-            storedToken.setExpired(true);
-            storedToken.setRevoked(true);
-            tokenRepository.saveAndFlush(storedToken);
+        if (storedSessionTokens != null) {
+            storedSessionTokens.setExpired(true);
+            storedSessionTokens.setRevoked(true);
+            firebaseTokenRepository.saveAndFlush(storedSessionTokens);
             SecurityContextHolder.clearContext();
         }
     }

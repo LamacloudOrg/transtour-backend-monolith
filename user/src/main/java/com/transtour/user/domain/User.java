@@ -1,29 +1,28 @@
 package com.transtour.user.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "users")
-public class User implements UserDetails {
+@Table(name = "users",schema = "transtour")
+public class User implements UserDetails, Serializable {
 
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "user_id", nullable = false)
     private String id;
 
     @Column(name = "dni")
@@ -49,11 +48,11 @@ public class User implements UserDetails {
     )
     private Set<Role> roles;
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private List<Token> tokens;
+    private List<SessionTokens> sessionTokens;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "token_id", referencedColumnName = "id")
-    private TokenDriver tokenDriver;
+    private FirebaseToken firebaseToken;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

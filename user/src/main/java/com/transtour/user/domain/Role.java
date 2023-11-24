@@ -1,24 +1,23 @@
 package com.transtour.user.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "roles")
-public class Role {
+@Table(name = "roles",schema = "transtour")
+public class Role implements Serializable {
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "role_id", nullable = false)
     private String id;
 
     @Column(nullable = false, length = 45)

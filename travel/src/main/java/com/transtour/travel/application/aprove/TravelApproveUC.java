@@ -61,14 +61,14 @@ public class TravelApproveUC {
 
                 AndroidPushNotificationEvent.create(
                         UUID.randomUUID().toString(),
-                        user.getTokenDriver().getFirebaseToken(),
+                        user.getFirebaseToken().getToken(),
                         travel.getOrderNumber(),
                         travel.getStatus(),
                         travel.getPayload().getOriginAddress(),
                         travel.getPayload().getDestinyAddress(),
                         travel.getPayload().getPassengerName(),
                         travel.getPayload().getObservation(),
-                        travel.getDateCreated(),
+                        travel.getCreatedAt().toLocalDate(),
                         travel.getPayload().getTime(),
                         travel.getCompany(),
                         travel.getPayload().getCarDriverName(),

@@ -4,7 +4,7 @@ import com.transtour.user.application.DriverResponse;
 import com.transtour.user.application.DriversResponse;
 import com.transtour.user.application.list_driver.query.ListDriversQuery;
 import com.transtour.user.domain.User;
-import com.transtour.user.infrastructure.persistence.jpa.DriverRepository;
+import com.transtour.user.infrastructure.persistence.jpa.SessionRepository;
 import com.transtour.user.infrastructure.persistence.jpa.UserRepository;
 import com.transtour.user.infrastructure.persistence.jpa.UserSpecification;
 import org.springframework.data.jpa.domain.Specification;
@@ -18,11 +18,11 @@ import java.util.stream.Collectors;
 public class GetDriversUC {
     private final UserRepository userRepository;
 
-    private final DriverRepository driverRepository;
+    private final SessionRepository sessionRepository;
 
-    public GetDriversUC(UserRepository userRepository, DriverRepository driverRepository) {
+    public GetDriversUC(UserRepository userRepository, SessionRepository sessionRepository) {
         this.userRepository = userRepository;
-        this.driverRepository = driverRepository;
+        this.sessionRepository = sessionRepository;
     }
 
     public DriversResponse find(ListDriversQuery query) {

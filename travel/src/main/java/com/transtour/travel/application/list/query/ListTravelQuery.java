@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Map;
 
 @Getter
@@ -15,13 +16,15 @@ public class ListTravelQuery implements Query {
     private final Pageable pageable;
     private String cardDriver;
     private TravelStatus travelStatus;
-    private LocalDate dateCreated;
+    private LocalDateTime dateCreated;
 
     public ListTravelQuery(Map<String, Object> params) {
-        Integer page = Integer.valueOf((String) params.getOrDefault("page", "1"));
-        Integer size = Integer.valueOf((String) params.getOrDefault("size", "100"));
-        String sortBy = (String) params.getOrDefault("sortBy", "dateCreated");
-        this.pageable = PageRequest.of(0, 3, Sort.by(sortBy).descending());
+        int currentPage = Integer.parseInt((String) params.getOrDefault("page", "0"));
+        int page = currentPage != 0 ? currentPage -1: 0 ;
+        int size = Integer.parseInt((String) params.getOrDefault("size", "100"));
+
+        String sortBy = (String) params.getOrDefault("sortBy", "createdAt");
+        this.pageable = PageRequest.of(page, size, Sort.by(sortBy).descending());
 
         if (params.containsKey("carDriver")) {
             this.cardDriver = (String) params.get("carDriver");
@@ -32,7 +35,7 @@ public class ListTravelQuery implements Query {
         }
 
         if (params.containsKey("dateCreated")) {
-            this.dateCreated = (LocalDate) params.get("dateCreated");
+            this.dateCreated = (LocalDateTime) params.get("dateCreated");
         }
 
     }

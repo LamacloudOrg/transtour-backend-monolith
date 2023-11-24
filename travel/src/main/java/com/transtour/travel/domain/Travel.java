@@ -2,53 +2,77 @@ package com.transtour.travel.domain;
 
 import com.transtour.kernel.domain.travel.TravelStatus;
 import com.transtour.travel.application.create.command.CreationCommand;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.envers.Audited;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
 
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "travels")
-public class Travel extends BaseEntity {
+@Audited(withModifiedFlag = true)
+@EntityListeners(AuditingEntityListener.class)
+@Table(name = "travels",schema = "transtour")
+public class Travel extends BaseEntity implements Serializable {
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "travel_seq_gen")
-    @SequenceGenerator(name = "users_seq_gen", sequenceName = "travel_id_seq")
+    @SequenceGenerator(name = "travel_seq_gen", sequenceName = "travel_id_seq")
     private Long orderNumber;
 
+    @Column(name = "car_driver")
     private String carDriver;
+    @Column(name = "company")
     private String company;
-    private LocalDate dateCreated;
+
+    @Column(name = "created_at", nullable = false, updatable = false)
+    @CreatedDate
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at", insertable = false)
+    @LastModifiedDate
+    private LocalDateTime updatedAt;
+
+    @Column(name = "created_by")
+    @CreatedBy
+    private String createdBy;
+
+    @Column(name = "modified_by")
+    @LastModifiedBy
+    private String modifiedBy;
+
+    @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private TravelStatus status;
 
     @Convert(converter = TravelConverter.class)
-    @Column(columnDefinition = "jsonb")
+    @Column(columnDefinition = "jsonb",name = "payload")
     private TravelInfoPayload payload;
 
     public static Travel create(CreationCommand command) {
-        LocalDateTime localDateTime = LocalDateTime.now();
-
-        ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.of("UTC-8"));
 
         Travel travel = new Travel();
         travel.setCompany(command.getCompany());
-        travel.setDateCreated(ZonedDateTime.now().toLocalDate());
+        //travel.setCreatedAt(ZonedDateTime.now(ZoneId.of("UTC-8")).toLocalDateTime());
         travel.setStatus(TravelStatus.CREATED);
         travel.setCarDriver(command.getCarDriver());
+        travel.setCreatedBy(command.getUserName());
         travel.setPayload(new TravelInfoPayload(
-                command.getStatus(), command.getDateCreated(), command.getCar(), command.getCarDriver(), command.getCarDriverName(), ZonedDateTime.now().toLocalTime(),
+                command.getStatus(), ZonedDateTime.now(ZoneId.of("UTC-3")).toLocalDate(), command.getCar(), command.getCarDriver(), command.getCarDriverName(), ZonedDateTime.now().toLocalTime(),
                 command.getCompany(), command.getBc(), command.getPassengerName(), command.getPassengerEmail(), command.getReserveNumber(),
                 command.getOriginAddress(), command.getDestinyAddress(), command.getObservation(), command.getAmount(), command.getWhitingTime(), command.getToll(),
                 command.getParkingAmount(), command.getTaxForReturn(), command.getTotalAmount(), null));

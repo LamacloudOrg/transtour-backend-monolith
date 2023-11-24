@@ -3,6 +3,7 @@ package com.transtour.travel.application.create;
 import com.transtour.travel.application.create.command.CreationCommand;
 import com.transtour.travel.domain.Travel;
 import com.transtour.travel.infrastructure.persistence.postgres.TravelRepository;
+import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,11 +21,13 @@ public class TravelCreationUC {
         this.repository = repository;
     }
 
+    @SneakyThrows
     public void createTravel(CreationCommand command) {
         logger.info("Travel creation");
-
         Travel travel = repository.save(Travel.create(command));
-        logger.debug("travel created "+travel.getOrderNumber());
+        logger.debug("travel created " + travel.getOrderNumber());
+
     }
+
 
 }

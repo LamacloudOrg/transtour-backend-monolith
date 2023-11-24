@@ -4,10 +4,10 @@ import com.transtour.kernel.exceptions.UserNotExists;
 import com.transtour.security.oauth.application.AuthenticationResponse;
 import com.transtour.security.oauth.application.authentication.query.AunthenticationQuery;
 import com.transtour.security.oauth.configuration.JwtService;
-import com.transtour.user.domain.Token;
+import com.transtour.user.domain.SessionTokens;
 import com.transtour.user.domain.TokenType;
 import com.transtour.user.domain.User;
-import com.transtour.user.infrastructure.persistence.jpa.TokenRepository;
+import com.transtour.user.infrastructure.persistence.jpa.FirebaseTokenRepository;
 import com.transtour.user.infrastructure.persistence.jpa.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,13 +26,13 @@ public class AuthenticationUC {
 
     private final JwtService jwtService;
 
-    private final TokenRepository tokenRepository;
+    private final FirebaseTokenRepository firebaseTokenRepository;
 
-    public AuthenticationUC(AuthenticationManager authenticationManager, UserRepository userRepository, JwtService jwtService, TokenRepository tokenRepository) {
+    public AuthenticationUC(AuthenticationManager authenticationManager, UserRepository userRepository, JwtService jwtService, FirebaseTokenRepository firebaseTokenRepository) {
         this.authenticationManager = authenticationManager;
         this.userRepository = userRepository;
         this.jwtService = jwtService;
-        this.tokenRepository = tokenRepository;
+        this.firebaseTokenRepository = firebaseTokenRepository;
     }
 
     public AuthenticationResponse authenticate(AunthenticationQuery query) {
@@ -43,9 +43,7 @@ public class AuthenticationUC {
                 )
         );
         User user = userRepository.findByDni(query.getDni())
-                .orElseThrow(() -> {
-                    return new UserNotExists();
-                });
+                .orElseThrow(UserNotExists::new);
         String jwtToken = jwtService.generateToken(user);
         revokeAllUserTokens(user);
         saveUserToken(user, jwtToken);
@@ -56,7 +54,7 @@ public class AuthenticationUC {
 
 
     private void saveUserToken(User user, String jwtToken) {
-        Token token = Token.builder()
+        SessionTokens sessionTokens = SessionTokens.builder()
                 .id(UUID.randomUUID().toString())
                 .user(user)
                 .token(jwtToken)
@@ -64,17 +62,17 @@ public class AuthenticationUC {
                 .expired(false)
                 .revoked(false)
                 .build();
-        tokenRepository.save(token);
+        firebaseTokenRepository.save(sessionTokens);
     }
 
     private void revokeAllUserTokens(User user) {
-        List<Token> validUserTokens = tokenRepository.findAllValidTokenByUser(user.getId());
-        if (validUserTokens.isEmpty())
+        List<SessionTokens> validUserSessionTokens = firebaseTokenRepository.findAllValidTokenByUser(user.getId());
+        if (validUserSessionTokens.isEmpty())
             return;
-        validUserTokens.forEach(token -> {
-            token.setExpired(true);
-            token.setRevoked(true);
+        validUserSessionTokens.forEach(sessionTokens -> {
+            sessionTokens.setExpired(true);
+            sessionTokens.setRevoked(true);
         });
-        tokenRepository.saveAll(validUserTokens);
+        firebaseTokenRepository.saveAll(validUserSessionTokens);
     }
 }

@@ -13,7 +13,7 @@ import java.time.LocalTime;
 public class TravelCreateRequest {
 
     private String status;
-    private LocalDate dateCreated;
+   // private LocalDate dateCreated;
     private String car;
     private String carDriver; // Aca va el dni
     private String carDriverName;  // Aca va el nombre del chofer

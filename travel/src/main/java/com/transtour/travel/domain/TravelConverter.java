@@ -6,11 +6,13 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.SneakyThrows;
 
 import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
 
 //@Converter(autoApply = true)
+@Converter
 public class TravelConverter implements AttributeConverter<TravelInfoPayload, String> {
 
-    private final static ObjectMapper GSON = new ObjectMapper();
+    private static final ObjectMapper GSON = new ObjectMapper();
 
     static {
         GSON.registerModule(new JavaTimeModule());

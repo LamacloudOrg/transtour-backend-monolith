@@ -1,10 +1,12 @@
 package com.transtour.security.oauth.configuration;
 
 
+import com.transtour.security.oauth.infrastructure.config.ApplicationAuditAware;
 import com.transtour.user.infrastructure.persistence.jpa.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -13,11 +15,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.sql.DataSource;
+
 @Configuration
 @RequiredArgsConstructor
 public class AuthenticationProviderConfiguration {
 
     private final UserRepository repository;
+    private final DataSource dataSource;
 
     @Bean
     public UserDetailsService userDetailsService() {
@@ -38,9 +43,16 @@ public class AuthenticationProviderConfiguration {
         return config.getAuthenticationManager();
     }
 
+
+    @Bean
+    AuditorAware<String> auditorAware() {
+        return new ApplicationAuditAware();
+    }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 
 }

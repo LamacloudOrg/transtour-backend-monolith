@@ -1,6 +1,29 @@
 ddd:
   context: transtour
+
 ---
+spring:
+  profiles: dev-init
+  sql:
+    init:
+      data-locations: classpath:data-dev.sql
+      schema-locations: classpath:schema-dev.sql
+      mode: always
+
+
+property:
+  schema:
+    name : "transtour"
+---
+
+spring:
+  profiles: preprod-init
+  sql:
+    init:
+      data-locations: classpath:data-preprod.sql
+      schema-locations: classpath:schema-preprod.sql
+---
+
 web:
   cors:
     allowed-origins: "http://localhost:3000"
@@ -8,36 +31,51 @@ web:
     max-age: 3600
     allowed-headers: "Requestor-Type"
     exposed-headers: "X-Get-Header"
-
 ---
 spring:
+  profiles: auditing
+
+  jpa:
+    properties:
+      org:
+        hibernate:
+          envers:
+            audit_strategy: org.hibernate.envers.strategy.ValidityAuditStrategy
+            audit_strategy_validity_store_revend_timestamp: true
+            store_data_at_delete: true
+            default_schema: transtour
+
+---
+-spring:
   profiles: h2
 
   datasource:
     driverClassName: org.h2.Driver
     password: sa
     username: sa
+    schema: 'transtour'
     url: jdbc:h2:mem:testdb;INIT=create domain if not exists jsonb as text;MODE=PostgreSQL;DB_CLOSE_DELAY=-1
   h2:
     console:
       enabled: true
 
   jpa:
-    generate-ddl: true
+    generate-ddl: false
     defer-datasource-initialization: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     show-sql: true
     properties:
       hibernate:
         format_sql: true
+      default_schema: transtour
     database-platform: org.hibernate.dialect.H2Dialect
 ---
 spring:
   profiles: postgres
   sql:
     init:
-      mode: always
+      mode: validate
   datasource:
     url: ENC(0M3iQOQdS1lNBdvLyljP1VLfGCk2mMXv16V40ug0kFGEUNRwydo43HR0PklE/2BIkJQ6We/Arno=)
     username: postgres
@@ -75,8 +113,6 @@ spring:
     username: ENC(FqmEuzWO0bRUxEefkMqa447q1L5SkfvPSZjiCLTUBVg=)
 
 
-
-
 ---
 spring:
   profiles: global
@@ -91,11 +127,14 @@ jasypt:
 ---
 
 spring:
-  profiles: property
+  profiles: properties
+  main:
+    allow-bean-definition-overriding: true
 
-FIREBASE:
-  API_URL: https://fcm.googleapis.com/fcm/send
-  AUTHENTICATION:
-    ANDROID: ENC(to6v28S1HT9E7Bf6V3L6vEzSIwlXj5od9vUrmRivnQGbIY+kTT/ZNNKpxuKOt/u4KiIitIduuwtzw1TJtWu14jIyvceQpzOCFjWYA91/iVDkRT5X7iC2ksX0fNJiP20BOsnzjXddMk7x723Ui623QO/pfY/9u+NGsCliJwt6a7gW6Bhgd/tc3R3gkzS3RkKC+GInscr5huZXBT21AQirx8VPjAKk0ORr)
-    IOS: ENC(z1+hZjB7kiSzgWWO+ejRjdn+7lgNKqJCJDzwMyYdDUgZtjZ4p/rpqff9aNj7/NGgw8TY9gfgBEfIfxAdMx0lxWLSVO1QMQ6Kucnb59gGy+0QSJtN6D5DABXBpc8me5BNX6p2zIRkNsmuhRhkjLtNTZIJB0v2MOvHX4pnK5TOEb9dQ72MemHpH+i9cozNYqLYpkm+jjjZXeiHJAbZpGCN4xmKFPE4cl99)
-
+application:
+  security:
+    jwt:
+      secret-key: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+      expiration: 86400000 # a day
+      refresh-token:
+        expiration: 604800000 # 7 days

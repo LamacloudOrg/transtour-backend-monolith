@@ -1,9 +1,12 @@
 package com.transtour.travel.application.list;
 
+import com.transtour.kernel.domain.travel.TravelStatus;
 import com.transtour.travel.application.TravelResponse;
 import com.transtour.travel.application.list.query.ListTravelQuery;
 import com.transtour.travel.infrastructure.persistence.postgres.TravelRepository;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 @Service
 public class ListTravelUC {
@@ -19,9 +22,9 @@ public class ListTravelUC {
 
         if (query.getCardDriver() != null && query.getDateCreated() != null && query.getTravelStatus() != null) {
             return new TravelResponse(
-                    travelRepository.findByDateCreatedAndStatusAndCarDriver(
+                    travelRepository.findByCreatedAtAndCarDriver(
                             query.getDateCreated(),
-                            query.getTravelStatus(),
+                            query.getTravelStatus().toString(),
                             query.getCardDriver(),
                             query.getPageable()
                     )
@@ -30,9 +33,9 @@ public class ListTravelUC {
         }
 
         if (query.getCardDriver() != null && query.getDateCreated() != null && query.getTravelStatus() == null) {
-            return new TravelResponse(travelRepository.findByDateCreatedAndCarDriver(
+            return new TravelResponse(travelRepository.findByCreatedAtAndStatus(
                     query.getDateCreated(),
-                    query.getCardDriver(),
+                    TravelStatus.valueOf(query.getCardDriver()),
                     query.getPageable()
             )
             );
@@ -50,7 +53,7 @@ public class ListTravelUC {
 
         if (query.getCardDriver() == null && query.getDateCreated() != null && query.getTravelStatus() != null) {
             return new TravelResponse(
-                    travelRepository.findByDateCreatedAndStatus(
+                    travelRepository.findByCreatedAtAndStatus(
                             query.getDateCreated(),
                             query.getTravelStatus(),
                             query.getPageable()
@@ -70,8 +73,8 @@ public class ListTravelUC {
 
         if (query.getCardDriver() == null && query.getDateCreated() != null && query.getTravelStatus() == null) {
             return new TravelResponse(
-                    travelRepository.findByDateCreated(
-                            query.getDateCreated(),
+                    travelRepository.findByCreatedAt(
+                           query.getDateCreated(),
                             query.getPageable()
                     )
             );
