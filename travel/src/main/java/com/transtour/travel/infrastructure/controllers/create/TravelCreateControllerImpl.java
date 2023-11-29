@@ -20,7 +20,7 @@ public class TravelCreateControllerImpl implements TravelCreateController {
 
     @Override
     public CompletableFuture<ResponseEntity> create(TravelCreateRequest request, UserDetails userDetails) {
-        CreationCommand command = new CreationCommand(userDetails.getUsername() ,request.getStatus(), request.getCar(), request.getCarDriver(), request.getCarDriverName(),
+        CreationCommand command = new CreationCommand(userDetails != null ? userDetails.getUsername() : "UNKNOW", request.getStatus(), request.getCar(), request.getCarDriver(), request.getCarDriverName(),
                 request.getTime(), request.getCompany(), request.getBc(), request.getPassengerName(), request.getPassengerEmail(), request.getReserveNumber(),
                 request.getOriginAddress(), request.getDestinyAddress(), request.getObservation(), request.getAmount(), request.getWhitingTime(), request.getToll(),
                 request.getParkingAmount(), request.getTaxForReturn(), request.getTotalAmount());

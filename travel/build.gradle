@@ -7,11 +7,17 @@ configurations {
 jar.enabled = true
 
 dependencies {
-    implementation 'com.vladmihalcea:hibernate-types-52:2.9.7'
+    implementation 'io.hypersistence:hypersistence-utils-hibernate-52:3.6.1'
     implementation 'net.sf.jasperreports:jasperreports:6.17.0'
     implementation 'com.lowagie:itext:2.1.7'
 
     implementation project(":kernel")
     implementation project(":user")
     implementation 'com.github.dozermapper:dozer-core:6.5.0'
+    testImplementation 'org.springframework.boot:spring-boot-starter-mail'
+    testImplementation 'org.springframework.security:spring-security-test:4.2.2.RELEASE'
+}
+
+test {
+    useJUnitPlatform()
 }

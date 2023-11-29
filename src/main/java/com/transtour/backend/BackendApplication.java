@@ -44,7 +44,7 @@ public class BackendApplication implements ApplicationRunner {
 
 
     public static void main(String[] args) {
-        //disableAccessWarnings();
+        disableAccessWarnings();
         SpringApplication.run(BackendApplication.class, args);
     }
 

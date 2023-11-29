@@ -11,9 +11,9 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.concurrent.Executors;
 
+@Getter
 @Component
 @Qualifier("GuavaImpl")
-@Getter
 public class GuavaBus implements EventBus {
 
     private final com.google.common.eventbus.EventBus internalBus;
@@ -31,7 +31,4 @@ public class GuavaBus implements EventBus {
 
     }
 
-    public com.google.common.eventbus.EventBus getInternalBus() {
-        return internalBus;
-    }
 }

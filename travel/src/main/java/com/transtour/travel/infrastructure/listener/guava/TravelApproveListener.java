@@ -1,5 +1,6 @@
 package com.transtour.travel.infrastructure.listener.guava;
 
+import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import com.transtour.kernel.infrastructure.bus.IGatewayHandler;
 import com.transtour.kernel.infrastructure.event.guava.GuavaBus;

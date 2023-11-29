@@ -1,17 +1,17 @@
-CREATE SEQUENCE hibernate_sequence;
+create sequence hibernate_sequence;
 
 
 create SCHEMA IF NOT EXISTS transtour;
 SET SCHEMA transtour;
 
 
-CREATE SEQUENCE travel_id_seq
-MINVALUE 1
-MAXVALUE 999999999
-INCREMENT BY 1
-START WITH 1
-NOCACHE
-NOCYCLE;
+create sequence travel_id_seq
+minvalue 1
+maxvalue 999999999
+increment by 1
+start with 1
+nocache
+nocycle;
 
 
 
@@ -48,7 +48,7 @@ create table transtour.company (
 
 
 create table transtour.travels (
-       id bigint not null,
+        travel_id bigint not null,
         car_driver varchar(255),
         company varchar(255),
         payload varchar(10000) not null,
@@ -57,7 +57,7 @@ create table transtour.travels (
         modified_by varchar(255),
         status varchar(255),
         updated_at timestamp,
-        PRIMARY KEY (id)
+        PRIMARY KEY (travel_id)
     );
 
 
@@ -73,7 +73,7 @@ create table revinfo (
 drop table IF EXISTS  transtour.travels_aud;
 
 create table transtour.travels_aud (
-   id bigint not null,
+   travel_id bigint not null,
     rev                INTEGER , -- The version number of the entity.
     revend             INTEGER , -- The version of the next version number after entity gets updated.
     revtype            INTEGER, -- The type of the revision.
@@ -94,7 +94,7 @@ create table transtour.travels_aud (
     payload_mod boolean,
     status varchar(255),
     status_mod boolean,
-    primary key (id, rev)
+    primary key (travel_id, rev)
 );
 
  drop table IF EXISTS  transtour.users ;

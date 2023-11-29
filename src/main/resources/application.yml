@@ -46,7 +46,7 @@ spring:
             default_schema: transtour
 
 ---
--spring:
+spring:
   profiles: h2
 
   datasource:
@@ -75,17 +75,17 @@ spring:
   profiles: postgres
   sql:
     init:
-      mode: validate
+      mode: NEVER
   datasource:
-    url: ENC(0M3iQOQdS1lNBdvLyljP1VLfGCk2mMXv16V40ug0kFGEUNRwydo43HR0PklE/2BIkJQ6We/Arno=)
-    username: postgres
-    password: ''
+    password: 'user'
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=transtour&stringtype=unspecified
+    username: 'pass'
     driver-class-name: org.postgresql.Driver
   jpa:
-    generate-ddl: true
-    defer-datasource-initialization: true
+    generate-ddl: false
+    defer-datasource-initialization: false
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     show-sql: true
     properties:
       hibernate:
@@ -97,6 +97,7 @@ spring:
 ---
 spring:
   profiles: mail
+
   mail:
     host: smtp.gmail.com
     password: ENC(s2Sj+LCCGIpzeNyboZkLC/hPVaJfdpMueqNPUk0+5k8=)
@@ -111,7 +112,6 @@ spring:
           ssl:
             enable: true
     username: ENC(FqmEuzWO0bRUxEefkMqa447q1L5SkfvPSZjiCLTUBVg=)
-
 
 ---
 spring:
@@ -138,3 +138,35 @@ application:
       expiration: 86400000 # a day
       refresh-token:
         expiration: 604800000 # 7 days
+
+
+---
+spring:
+  profiles: tc
+
+  security:
+    enabled: false
+  ignored: /**
+  management:
+    security:
+      enabled: false
+
+
+  datasource:
+    hikari:
+      data-source-properties: stringtype=unspecified
+    tomcat:
+      connection-properties: stringtype=unspecified
+
+    password: 'dbpwd!'
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=transtour&stringtype=unspecified
+    username: 'dbadm'
+  jpa:
+    hibernate:
+      ddl-auto: none
+      show-sql: true
+      default_schema: transtour
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+

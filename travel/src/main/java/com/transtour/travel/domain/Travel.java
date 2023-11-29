@@ -2,7 +2,9 @@ package com.transtour.travel.domain;
 
 import com.transtour.kernel.domain.travel.TravelStatus;
 import com.transtour.travel.application.create.command.CreationCommand;
+import io.hypersistence.utils.hibernate.type.json.JsonBinaryType;
 import lombok.*;
+import org.hibernate.annotations.TypeDef;
 import org.hibernate.envers.Audited;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -26,12 +28,13 @@ import java.time.ZonedDateTime;
 @Audited(withModifiedFlag = true)
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "travels",schema = "transtour")
-public class Travel extends BaseEntity implements Serializable {
+@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
+public class Travel implements Serializable {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "travel_id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "travel_seq_gen")
-    @SequenceGenerator(name = "travel_seq_gen", sequenceName = "travel_id_seq")
+    @SequenceGenerator(name = "travel_seq_gen", sequenceName = "travel_id_seq", allocationSize = 1)
     private Long orderNumber;
 
     @Column(name = "car_driver")
@@ -60,7 +63,7 @@ public class Travel extends BaseEntity implements Serializable {
     private TravelStatus status;
 
     @Convert(converter = TravelConverter.class)
-    @Column(columnDefinition = "jsonb",name = "payload")
+    @Column(name = "payload", columnDefinition = "jsonb")
     private TravelInfoPayload payload;
 
     public static Travel create(CreationCommand command) {

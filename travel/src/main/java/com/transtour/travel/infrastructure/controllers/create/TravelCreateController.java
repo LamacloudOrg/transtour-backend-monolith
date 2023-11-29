@@ -14,6 +14,6 @@ public interface TravelCreateController {
 
     @PostMapping()
     CompletableFuture<ResponseEntity> create(
-            @RequestBody TravelCreateRequest request,@AuthenticationPrincipal UserDetails userDetails
+            @RequestBody TravelCreateRequest request, @AuthenticationPrincipal UserDetails userDetails
     );
 }
