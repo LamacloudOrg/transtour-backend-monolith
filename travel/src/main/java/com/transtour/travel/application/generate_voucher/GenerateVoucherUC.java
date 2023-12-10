@@ -39,6 +39,9 @@ public class GenerateVoucherUC {
 
         try {
             Travel travel = repository.findById(command.getTravelId()).orElseThrow(() -> new TravelNotFoundException(command.getTravelId().toString()));
+            String fileNameReport = jasperReportUtil.generateFileName(travel.getCompany());
+            travel.getPayload().setSignaturePath(FILE_PATH + fileNameReport + "-signature.png");
+            travel.getPayload().setReportPath(FILE_PATH + fileNameReport + ".pdf");
 
             ArrayList<Map<String, Object>> pieceFieldDetailsMaps = new ArrayList<>();
             TravelInfoPayload travelInfoPayload = travel.getPayload();
@@ -46,12 +49,11 @@ public class GenerateVoucherUC {
             pieceFieldDetailsMaps.add(data);
 
             //generate signature
-            File file = new File(FILE_PATH + travel.getOrderNumber() + ".pdf");
-            FileUtils.writeByteArrayToFile(new File(FILE_PATH + travel.getOrderNumber() + "-signature.png"), travelInfoPayload.getSignature());
-            //generate voucher
-            //String fileName = FILE_PATH + travel.getOrderNumber() + ".pdf";
-            jasperReportUtil.generate(file.getPath(), pieceFieldDetailsMaps, data);
+            File file = new File(travel.getPayload().getReportPath());
+            FileUtils.writeByteArrayToFile(new File(travel.getPayload().getSignaturePath()), travelInfoPayload.getSignature());
 
+            jasperReportUtil.generate(file.getPath(), pieceFieldDetailsMaps, data);
+            repository.save(travel);
             logger.info("generando voucher");
 
         } catch (JRException e) {

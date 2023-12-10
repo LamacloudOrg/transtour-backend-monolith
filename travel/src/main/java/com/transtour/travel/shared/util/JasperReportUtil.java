@@ -15,6 +15,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -69,6 +72,23 @@ public class JasperReportUtil {
         });
 
         return detail;
+    }
+
+    public String generateFileName(String constantName) {
+        // Obtener la fecha actual
+        LocalDate currentDate = LocalDate.now();
+        // Formatear la fecha como DD/MM/YYYY
+        String formattedDate = currentDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
+        // Obtener la hora actual
+        LocalTime currentTime = LocalTime.now();
+        // Formatear la hora como HH:MM
+        String formattedTime = currentTime.format(DateTimeFormatter.ofPattern("HH:mm"));
+
+        // Concatenar todos los elementos para formar el nombre de archivo
+        String fileName = formattedDate + "_" + constantName + "_" + formattedTime;
+
+        return fileName;
     }
 
 }

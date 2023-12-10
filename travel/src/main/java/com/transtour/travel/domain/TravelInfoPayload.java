@@ -34,5 +34,7 @@ public class TravelInfoPayload implements Serializable {
     private String taxForReturn;
     private String totalAmount;
     private byte[] signature;
+    private String signaturePath;
+    private String reportPath;
 
 }
