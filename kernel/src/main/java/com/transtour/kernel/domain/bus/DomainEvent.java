@@ -27,6 +27,9 @@ public abstract class DomainEvent {
         this.attributes = attributes;
     }
 
+    public DomainEvent(Map<String, Serializable> attributes) {
+    }
+
     public abstract String eventName();
 
     private void ensureValidUuid(String value) throws IllegalArgumentException {

@@ -6,5 +6,6 @@ public enum TravelStatus {
     CANCELED,
     READY,
     SIGNED,
-    DONE
+    DONE,
+    ERROR
 }
