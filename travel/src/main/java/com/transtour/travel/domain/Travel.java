@@ -78,7 +78,7 @@ public class Travel implements Serializable {
                 command.getStatus(), ZonedDateTime.now(ZoneId.of("UTC-3")).toLocalDate(), command.getCar(), command.getCarDriver(), command.getCarDriverName(), ZonedDateTime.now().toLocalTime(),
                 command.getCompany(), command.getBc(), command.getPassengerName(), command.getPassengerEmail(), command.getReserveNumber(),
                 command.getOriginAddress(), command.getDestinyAddress(), command.getObservation(), command.getAmount(), command.getWhitingTime(), command.getToll(),
-                command.getParkingAmount(), command.getTaxForReturn(), command.getTotalAmount(), null));
+                command.getParkingAmount(), command.getTaxForReturn(), command.getTotalAmount(), null, null, null));
         return travel;
     }
 
